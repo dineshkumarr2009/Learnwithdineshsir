@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Know Your OCEAN — Big Five Personality Report | Learn with Dinesh Sir</title>
+<style>
+:root{
+  --mustard:#E8B53D;
+  --maroon:#6A1B1A;
+  --cream:#FFFBF0;
+  --ink:#2B1B12;
+  --paper:#FFFFFF;
+  --line:#E6DCC6;
+  --teal:#2F6E63;
+  --rose:#B5657A;
+  --olive:#6B7A4F;
+  --slate:#4C5B77;
+  --c-N:#6A1B1A;
+  --c-E:#E8B53D;
+  --c-O:#2F6E63;
+  --c-A:#B5657A;
+  --c-C:#4C5B77;
+  --font-display:Georgia,'Times New Roman',serif;
+  --font-body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.5;
+  min-height:100vh;
+}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 80px;}
+.brandbar{display:flex;align-items:center;gap:10px;margin-bottom:28px;}
+.mark{
+  width:38px;height:38px;border-radius:50%;background:var(--maroon);
+  color:var(--mustard);display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:20px;font-weight:700;flex-shrink:0;
+}
+.brandtext{font-family:var(--font-display);font-size:14px;letter-spacing:.04em;color:var(--maroon);}
+.brandtext b{display:block;font-size:16px;}
+
+/* INTRO */
+.hero h1{
+  font-family:var(--font-display);
+  font-size:clamp(28px,5vw,42px);
+  color:var(--maroon);
+  margin:0 0 6px;
+  line-height:1.15;
+}
+.hero .sub{font-size:16px;color:#5c4a3a;margin-bottom:26px;}
+.ocean-row{display:flex;gap:6px;margin:22px 0 26px;flex-wrap:wrap;}
+.ocean-chip{
+  flex:1;min-width:88px;padding:12px 6px;text-align:center;border-radius:10px;
+  font-family:var(--font-display);font-size:13px;color:#fff;
+}
+.ocean-chip b{display:block;font-size:20px;}
+.card{
+  background:var(--paper);border:1px solid var(--line);border-radius:14px;
+  padding:24px;margin-bottom:18px;
+}
+.meta-list{list-style:none;padding:0;margin:0;font-size:14px;color:#5c4a3a;}
+.meta-list li{padding:6px 0;border-bottom:1px dashed var(--line);}
+.meta-list li:last-child{border-bottom:none;}
+.meta-list b{color:var(--ink);}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:13px;color:#5c4a3a;margin-bottom:6px;font-weight:600;}
+.field input{
+  width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;
+  font-family:var(--font-body);font-size:15px;background:#fffdf7;
+}
+.btn{
+  display:inline-block;background:var(--maroon);color:var(--mustard);border:none;
+  padding:14px 26px;border-radius:999px;font-family:var(--font-body);font-weight:700;
+  font-size:15px;cursor:pointer;letter-spacing:.02em;transition:transform .12s ease,opacity .12s;
+}
+.btn:hover{transform:translateY(-1px);opacity:.93;}
+.btn.ghost{background:transparent;color:var(--maroon);border:1.5px solid var(--maroon);}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;}
+
+/* QUESTION SCREEN */
+.progresswrap{margin-bottom:30px;}
+.progressbar{height:6px;background:var(--line);border-radius:99px;overflow:hidden;}
+.progressfill{height:100%;background:var(--mustard);transition:width .25s ease;}
+.progresslabel{font-size:12px;color:#8a7660;margin-top:8px;display:flex;justify-content:space-between;}
+.qcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:36px 28px;text-align:center;}
+.qeyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mustard);font-weight:700;margin-bottom:14px;}
+.qtext{font-family:var(--font-display);font-size:clamp(22px,4vw,28px);color:var(--maroon);margin:0 0 30px;line-height:1.3;}
+.choices{display:flex;flex-direction:column;gap:10px;}
+.choice{
+  padding:14px 18px;border:1.5px solid var(--line);border-radius:10px;background:#fffdf7;
+  text-align:left;font-size:15px;color:var(--ink);cursor:pointer;font-family:var(--font-body);
+  display:flex;align-items:center;gap:12px;transition:.12s;
+}
+.choice:hover{border-color:var(--mustard);background:#fff8e6;}
+.choice .dot{width:16px;height:16px;border-radius:50%;border:2px solid #c9b98f;flex-shrink:0;}
+.choice.selected{border-color:var(--maroon);background:#fdf1e2;}
+.choice.selected .dot{background:var(--maroon);border-color:var(--maroon);}
+.navrow{display:flex;justify-content:space-between;margin-top:26px;}
+.skiptext{font-size:12px;color:#8a7660;margin-top:16px;}
+
+/* REPORT */
+.reportheader{text-align:center;margin-bottom:30px;}
+.reportheader h1{font-family:var(--font-display);color:var(--maroon);font-size:30px;margin:14px 0 4px;}
+.reportheader p{color:#5c4a3a;font-size:14px;}
+.domainblock{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:26px;margin-bottom:16px;}
+.domainhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;flex-wrap:wrap;gap:6px;}
+.domainname{font-family:var(--font-display);font-size:22px;color:var(--ink);}
+.domainband{font-size:13px;font-weight:700;padding:4px 12px;border-radius:99px;color:#fff;}
+.domaindesc{font-size:14.5px;color:#4a3b2c;margin:10px 0 16px;}
+.spectrum{position:relative;height:14px;border-radius:99px;background:#efe6d2;margin:14px 0 6px;overflow:visible;}
+.spectrumfill{position:absolute;left:0;top:0;height:100%;border-radius:99px;}
+.spectrummarker{position:absolute;top:-5px;width:4px;height:24px;background:var(--ink);border-radius:2px;}
+.spectrumlabels{display:flex;justify-content:space-between;font-size:11px;color:#8a7660;margin-bottom:18px;}
+.facetgrid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:6px;}
+.facetrow{display:grid;grid-template-columns:130px 1fr 40px;gap:10px;align-items:center;font-size:13px;}
+.facetname{color:#4a3b2c;}
+.facetbar{height:8px;background:#efe6d2;border-radius:99px;overflow:hidden;}
+.facetbarfill{height:100%;border-radius:99px;}
+.facetscore{text-align:right;color:#8a7660;font-size:12px;}
+.facetnote{font-size:12.5px;color:#6b5a47;margin-top:4px;grid-column:1/-1;}
+.workblock{background:#fdf6e6;border-left:3px solid var(--mustard);padding:12px 16px;border-radius:0 8px 8px 0;font-size:13.5px;color:#4a3b2c;margin-top:14px;}
+.workblock b{color:var(--maroon);}
+.classroomsection{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:26px;margin-top:24px;}
+.classroomsection h2{font-family:var(--font-display);color:var(--maroon);font-size:20px;margin-top:0;}
+.footer-note{font-size:12px;color:#8a7660;text-align:center;margin-top:30px;line-height:1.6;}
+@media print{
+  .noprint{display:none !important;}
+  body{background:#fff;}
+  .card,.domainblock,.classroomsection{border:1px solid #ccc;box-shadow:none;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brandbar">
+    <div class="mark">द</div>
+    <div class="brandtext"><b>Learn with Dinesh Sir</b>Organisational Behaviour · Personality Unit</div>
+  </div>
+
+  <!-- SCREEN: INTRO -->
+  <div id="screen-intro">
+    <div class="hero">
+      <h1>Know Your OCEAN</h1>
+      <p class="sub">A detailed personality report using the Big Five (Five-Factor Model) — the framework you're about to study in class.</p>
+    </div>
+
+    <div class="ocean-row">
+      <div class="ocean-chip" style="background:var(--c-O)"><b>O</b>Openness</div>
+      <div class="ocean-chip" style="background:var(--c-C)"><b>C</b>Conscientiousness</div>
+      <div class="ocean-chip" style="background:var(--c-E)"><b>E</b>Extraversion</div>
+      <div class="ocean-chip" style="background:var(--c-A)"><b>A</b>Agreeableness</div>
+      <div class="ocean-chip" style="background:var(--c-N)"><b>N</b>Neuroticism</div>
+    </div>
+
+    <div class="card">
+      <ul class="meta-list">
+        <li><b>120 statements</b> — rate how accurately each describes you, roughly 15–20 minutes</li>
+        <li><b>Instrument:</b> IPIP-NEO-120 (Johnson, 2014) — a validated, public-domain measure of the Five-Factor Model, built from the International Personality Item Pool</li>
+        <li><b>You'll get:</b> 5 domain scores + 30 facet scores, with plain-language interpretation and workplace relevance</li>
+        <li><b>Be honest, not aspirational</b> — answer as you actually are, not as you'd like to be. There are no right or wrong answers.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <label>Your name (appears on your report)</label>
+        <input type="text" id="input-name" placeholder="e.g. Ananya Rao">
+      </div>
+      <div class="field">
+        <label>Class / section (optional)</label>
+        <input type="text" id="input-class" placeholder="e.g. BBA 3B">
+      </div>
+      <button class="btn" onclick="startTest()">Begin the Assessment →</button>
+    </div>
+    <p class="footer-note">This is a self-report screening tool for classroom learning, not a clinical or diagnostic instrument. Nothing you enter is sent anywhere — it stays in this browser tab.</p>
+  </div>
+
+  <!-- SCREEN: TEST -->
+  <div id="screen-test" style="display:none;">
+    <div class="progresswrap">
+      <div class="progressbar"><div class="progressfill" id="progressfill" style="width:0%"></div></div>
+      <div class="progresslabel"><span id="progresstext">Question 1 of 120</span><span id="progresspct">0%</span></div>
+    </div>
+    <div class="qcard">
+      <div class="qeyebrow">I see myself as someone who...</div>
+      <div class="qtext" id="qtext">—</div>
+      <div class="choices" id="choices"></div>
+    </div>
+    <div class="navrow noprint">
+      <button class="btn ghost" id="backbtn" onclick="prevQ()">← Back</button>
+      <button class="btn ghost" onclick="skipQ()">Skip for now</button>
+    </div>
+  </div>
+
+  <!-- SCREEN: REPORT -->
+  <div id="screen-report" style="display:none;"></div>
+
+</div>
+
+<script>
+/* ---------------- ITEM BANK: IPIP-NEO-120 (Johnson, 2014) — public domain ---------------- */
+const ITEMS = [{"n":1,"t":"Worry about things","d":"N","f":1,"k":1},{"n":2,"t":"Make friends easily","d":"E","f":1,"k":1},{"n":3,"t":"Have a vivid imagination","d":"O","f":1,"k":1},{"n":4,"t":"Trust others","d":"A","f":1,"k":1},{"n":5,"t":"Complete tasks successfully","d":"C","f":1,"k":1},{"n":6,"t":"Get angry easily","d":"N","f":2,"k":1},{"n":7,"t":"Love large parties","d":"E","f":2,"k":1},{"n":8,"t":"Believe in the importance of art","d":"O","f":2,"k":1},{"n":9,"t":"Use others for my own ends","d":"A","f":2,"k":-1},{"n":10,"t":"Like to tidy up","d":"C","f":2,"k":1},{"n":11,"t":"Often feel blue","d":"N","f":3,"k":1},{"n":12,"t":"Take charge","d":"E","f":3,"k":1},{"n":13,"t":"Experience my emotions intensely","d":"O","f":3,"k":1},{"n":14,"t":"Love to help others","d":"A","f":3,"k":1},{"n":15,"t":"Keep my promises","d":"C","f":3,"k":1},{"n":16,"t":"Find it difficult to approach others","d":"N","f":4,"k":1},{"n":17,"t":"Am always busy","d":"E","f":4,"k":1},{"n":18,"t":"Prefer variety to routine","d":"O","f":4,"k":1},{"n":19,"t":"Love a good fight","d":"A","f":4,"k":-1},{"n":20,"t":"Work hard","d":"C","f":4,"k":1},{"n":21,"t":"Go on binges","d":"N","f":5,"k":1},{"n":22,"t":"Love excitement","d":"E","f":5,"k":1},{"n":23,"t":"Love to read challenging material","d":"O","f":5,"k":1},{"n":24,"t":"Believe that I am better than others","d":"A","f":5,"k":-1},{"n":25,"t":"Am always prepared","d":"C","f":5,"k":1},{"n":26,"t":"Panic easily","d":"N","f":6,"k":1},{"n":27,"t":"Radiate joy","d":"E","f":6,"k":1},{"n":28,"t":"Tend to vote for liberal political candidates","d":"O","f":6,"k":1},{"n":29,"t":"Sympathize with the homeless","d":"A","f":6,"k":1},{"n":30,"t":"Jump into things without thinking","d":"C","f":6,"k":-1},{"n":31,"t":"Fear for the worst","d":"N","f":1,"k":1},{"n":32,"t":"Feel comfortable around people","d":"E","f":1,"k":1},{"n":33,"t":"Enjoy wild flights of fantasy","d":"O","f":1,"k":1},{"n":34,"t":"Believe that others have good intentions","d":"A","f":1,"k":1},{"n":35,"t":"Excel in what I do","d":"C","f":1,"k":1},{"n":36,"t":"Get irritated easily","d":"N","f":2,"k":1},{"n":37,"t":"Talk to a lot of different people at parties","d":"E","f":2,"k":1},{"n":38,"t":"See beauty in things that others might not notice","d":"O","f":2,"k":1},{"n":39,"t":"Cheat to get ahead","d":"A","f":2,"k":-1},{"n":40,"t":"Often forget to put things back in their proper place","d":"C","f":2,"k":-1},{"n":41,"t":"Dislike myself","d":"N","f":3,"k":1},{"n":42,"t":"Try to lead others","d":"E","f":3,"k":1},{"n":43,"t":"Feel others' emotions","d":"O","f":3,"k":1},{"n":44,"t":"Am concerned about others","d":"A","f":3,"k":1},{"n":45,"t":"Tell the truth","d":"C","f":3,"k":1},{"n":46,"t":"Am afraid to draw attention to myself","d":"N","f":4,"k":1},{"n":47,"t":"Am always on the go","d":"E","f":4,"k":1},{"n":48,"t":"Prefer to stick with things that I know","d":"O","f":4,"k":-1},{"n":49,"t":"Yell at people","d":"A","f":4,"k":-1},{"n":50,"t":"Do more than what's expected of me","d":"C","f":4,"k":1},{"n":51,"t":"Rarely overindulge","d":"N","f":5,"k":-1},{"n":52,"t":"Seek adventure","d":"E","f":5,"k":1},{"n":53,"t":"Avoid philosophical discussions","d":"O","f":5,"k":-1},{"n":54,"t":"Think highly of myself","d":"A","f":5,"k":-1},{"n":55,"t":"Carry out my plans","d":"C","f":5,"k":1},{"n":56,"t":"Become overwhelmed by events","d":"N","f":6,"k":1},{"n":57,"t":"Have a lot of fun","d":"E","f":6,"k":1},{"n":58,"t":"Believe that there is no absolute right and wrong","d":"O","f":6,"k":1},{"n":59,"t":"Feel sympathy for those who are worse off than myself","d":"A","f":6,"k":1},{"n":60,"t":"Make rash decisions","d":"C","f":6,"k":-1},{"n":61,"t":"Am afraid of many things","d":"N","f":1,"k":1},{"n":62,"t":"Avoid contacts with others","d":"E","f":1,"k":-1},{"n":63,"t":"Love to daydream","d":"O","f":1,"k":1},{"n":64,"t":"Trust what people say","d":"A","f":1,"k":1},{"n":65,"t":"Handle tasks smoothly","d":"C","f":1,"k":1},{"n":66,"t":"Lose my temper","d":"N","f":2,"k":1},{"n":67,"t":"Prefer to be alone","d":"E","f":2,"k":-1},{"n":68,"t":"Do not like poetry","d":"O","f":2,"k":-1},{"n":69,"t":"Take advantage of others","d":"A","f":2,"k":-1},{"n":70,"t":"Leave a mess in my room","d":"C","f":2,"k":-1},{"n":71,"t":"Am often down in the dumps","d":"N","f":3,"k":1},{"n":72,"t":"Take control of things","d":"E","f":3,"k":1},{"n":73,"t":"Rarely notice my emotional reactions","d":"O","f":3,"k":-1},{"n":74,"t":"Am indifferent to the feelings of others","d":"A","f":3,"k":-1},{"n":75,"t":"Break rules","d":"C","f":3,"k":-1},{"n":76,"t":"Only feel comfortable with friends","d":"N","f":4,"k":1},{"n":77,"t":"Do a lot in my spare time","d":"E","f":4,"k":1},{"n":78,"t":"Dislike changes","d":"O","f":4,"k":-1},{"n":79,"t":"Insult people","d":"A","f":4,"k":-1},{"n":80,"t":"Do just enough work to get by","d":"C","f":4,"k":-1},{"n":81,"t":"Easily resist temptations","d":"N","f":5,"k":-1},{"n":82,"t":"Enjoy being reckless","d":"E","f":5,"k":1},{"n":83,"t":"Have difficulty understanding abstract ideas","d":"O","f":5,"k":-1},{"n":84,"t":"Have a high opinion of myself","d":"A","f":5,"k":-1},{"n":85,"t":"Waste my time","d":"C","f":5,"k":-1},{"n":86,"t":"Feel that I'm unable to deal with things","d":"N","f":6,"k":1},{"n":87,"t":"Love life","d":"E","f":6,"k":1},{"n":88,"t":"Tend to vote for conservative political candidates","d":"O","f":6,"k":-1},{"n":89,"t":"Am not interested in other people's problems","d":"A","f":6,"k":-1},{"n":90,"t":"Rush into things","d":"C","f":6,"k":-1},{"n":91,"t":"Get stressed out easily","d":"N","f":1,"k":1},{"n":92,"t":"Keep others at a distance","d":"E","f":1,"k":-1},{"n":93,"t":"Like to get lost in thought","d":"O","f":1,"k":1},{"n":94,"t":"Distrust people","d":"A","f":1,"k":-1},{"n":95,"t":"Know how to get things done","d":"C","f":1,"k":1},{"n":96,"t":"Am not easily annoyed","d":"N","f":2,"k":-1},{"n":97,"t":"Avoid crowds","d":"E","f":2,"k":-1},{"n":98,"t":"Do not enjoy going to art museums","d":"O","f":2,"k":-1},{"n":99,"t":"Obstruct others' plans","d":"A","f":2,"k":-1},{"n":100,"t":"Leave my belongings around","d":"C","f":2,"k":-1},{"n":101,"t":"Feel comfortable with myself","d":"N","f":3,"k":-1},{"n":102,"t":"Wait for others to lead the way","d":"E","f":3,"k":-1},{"n":103,"t":"Don't understand people who get emotional","d":"O","f":3,"k":-1},{"n":104,"t":"Take no time for others","d":"A","f":3,"k":-1},{"n":105,"t":"Break my promises","d":"C","f":3,"k":-1},{"n":106,"t":"Am not bothered by difficult social situations","d":"N","f":4,"k":-1},{"n":107,"t":"Like to take it easy","d":"E","f":4,"k":-1},{"n":108,"t":"Am attached to conventional ways","d":"O","f":4,"k":-1},{"n":109,"t":"Get back at others","d":"A","f":4,"k":-1},{"n":110,"t":"Put little time and effort into my work","d":"C","f":4,"k":-1},{"n":111,"t":"Am able to control my cravings","d":"N","f":5,"k":-1},{"n":112,"t":"Act wild and crazy","d":"E","f":5,"k":1},{"n":113,"t":"Am not interested in theoretical discussions","d":"O","f":5,"k":-1},{"n":114,"t":"Boast about my virtues","d":"A","f":5,"k":-1},{"n":115,"t":"Have difficulty starting tasks","d":"C","f":5,"k":-1},{"n":116,"t":"Remain calm under pressure","d":"N","f":6,"k":-1},{"n":117,"t":"Look at the bright side of life","d":"E","f":6,"k":1},{"n":118,"t":"Believe that we should be tough on crime","d":"O","f":6,"k":-1},{"n":119,"t":"Try not to think about the needy","d":"A","f":6,"k":-1},{"n":120,"t":"Act without thinking","d":"C","f":6,"k":-1}];
+
+const CHOICES = [
+  {v:1,t:"Very Inaccurate"},
+  {v:2,t:"Moderately Inaccurate"},
+  {v:3,t:"Neither Accurate nor Inaccurate"},
+  {v:4,t:"Moderately Accurate"},
+  {v:5,t:"Very Accurate"}
+];
+
+const FACET_NAMES = {
+  N:["Anxiety","Anger","Depression","Self-Consciousness","Immoderation","Vulnerability"],
+  E:["Friendliness","Gregariousness","Assertiveness","Activity Level","Excitement-Seeking","Cheerfulness"],
+  O:["Imagination","Artistic Interests","Emotionality","Adventurousness","Intellect","Liberalism"],
+  A:["Trust","Morality","Altruism","Cooperation","Modesty","Sympathy"],
+  C:["Self-Efficacy","Orderliness","Dutifulness","Achievement-Striving","Self-Discipline","Cautiousness"]
+};
+
+const FACET_NOTES = {
+  N:[
+    ["Rarely troubled by worry, even under pressure.","Tends to anticipate problems and feel tense about what could go wrong."],
+    ["Even-tempered; slow to feel irritated.","Quick to feel irritated or frustrated when things don't go as expected."],
+    ["Generally upbeat; rarely dwells on setbacks.","Prone to low mood, discouragement, or feeling down."],
+    ["Comfortable in social spotlight and unfamiliar situations.","Feels exposed or embarrassed easily in social settings."],
+    ["Manages urges and cravings with ease.","Finds it hard to resist temptations or immediate gratification."],
+    ["Stays composed and capable under stress.","Feels overwhelmed or panicked when pressure mounts."]
+  ],
+  E:[
+    ["Reserved; takes time to warm up to people.","Warms to people quickly and puts others at ease."],
+    ["Prefers small groups or solitude over crowds.","Energised by being around many people at once."],
+    ["Comfortable letting others take the lead.","Naturally steps up to direct and influence others."],
+    ["Prefers a measured, unhurried pace.","Keeps a fast pace and is rarely idle."],
+    ["Prefers calm, predictable experiences.","Actively seeks thrills, risk, and stimulation."],
+    ["Even-keeled; doesn't display high enthusiasm.","Radiates optimism and enthusiasm readily."]
+  ],
+  O:[
+    ["Grounded in the practical and concrete.","Rich inner fantasy life; enjoys imaginative thinking."],
+    ["Indifferent to art and aesthetic experiences.","Deeply moved by art, music, beauty, and design."],
+    ["Keeps feelings private, even from themselves.","Aware of and attentive to their own emotional states."],
+    ["Sticks with the tried-and-tested; dislikes change.","Actively seeks novelty, travel, and new experiences."],
+    ["Prefers concrete, applied thinking over theory.","Enjoys abstract, philosophical, and theoretical ideas."],
+    ["Holds traditional views on social/moral questions.","Open to unconventional ideas and questions tradition."]
+  ],
+  A:[
+    ["Cautious about others' motives; verifies before trusting.","Assumes good intentions in others readily."],
+    ["Pragmatic; comfortable bending rules for advantage.","Direct, sincere, and uncomfortable with manipulation."],
+    ["Focuses on own goals over others' needs.","Genuinely invested in helping and supporting others."],
+    ["Comfortable with confrontation and conflict.","Prefers to defer and avoid conflict for harmony."],
+    ["Confident in stating own abilities and worth.","Self-effacing; downplays own achievements."],
+    ["Views others' hardship with detachment.","Feels others' distress and is moved to concern."]
+  ],
+  C:[
+    ["Modest confidence in own competence.","Confident in ability to handle tasks effectively."],
+    ["Comfortable with mess and spontaneity.","Keeps things tidy, structured, and organised."],
+    ["Flexible about obligations and commitments.","Feels strongly bound by duty and promises."],
+    ["Content with adequate effort.","Sets ambitious goals and works hard to reach them."],
+    ["Easily distracted from tasks at hand.","Stays focused and follows through despite distraction."],
+    ["Acts spontaneously, decides quickly.","Thinks carefully before acting; weighs consequences."]
+  ]
+};
+
+const DOMAIN_META = {
+  N:{
+    name:"Neuroticism",
+    tag:"Emotional Range",
+    color:"var(--c-N)",
+    lowLabel:"Emotionally Steady",
+    highLabel:"Emotionally Reactive",
+    desc:"Neuroticism reflects how readily someone experiences negative emotion — worry, irritation, low mood — and how quickly they recover. It is not about being 'unstable'; it's about emotional sensitivity and reactivity.",
+    high:"You tend to feel emotions — especially stress, worry, and frustration — more intensely and more often than most. This isn't a flaw: it often comes with high self-awareness, empathy for others' struggles, and vigilance that catches real risks early. The growth edge is building routines that help you regulate before stress compounds.",
+    low:"You tend to stay emotionally steady, even when circumstances get difficult. This gives you a calm, stabilising presence — but watch for the flip side: steadiness can sometimes read as detachment, and it's worth checking in on how intensely others around you may be feeling things.",
+    work:"In the workplace, this trait shows up most under deadline pressure, conflict, and ambiguity. High-N individuals often make excellent risk-assessors and quality-checkers precisely because they notice what could go wrong; low-N individuals are natural calming forces in a crisis and in client-facing or high-pressure roles."
+  },
+  E:{
+    name:"Extraversion",
+    tag:"Social Energy",
+    color:"var(--c-E)",
+    lowLabel:"Introverted",
+    highLabel:"Extraverted",
+    desc:"Extraversion captures where someone draws energy from — social stimulation and activity, or quiet and independent focus — along with assertiveness and positive emotionality.",
+    high:"You draw energy from people, action, and stimulation. You're likely comfortable initiating conversations, taking the lead, and thriving in fast-paced, socially rich environments. Watch for a tendency to dominate quieter voices in group settings without meaning to.",
+    low:"You draw energy from solitude and focused, independent work, and you likely think before you speak. This often means depth over breadth in relationships and strong independent output — but it's worth deliberately practising visibility in group settings where quieter contributions can get overlooked.",
+    work:"Extraversion predicts comfort in sales, public speaking, networking, and leadership visibility roles. Introversion is strongly linked to sustained focus, careful analysis, and written communication — both are equally valuable, just suited to different roles on a team."
+  },
+  O:{
+    name:"Openness to Experience",
+    tag:"Curiosity & Imagination",
+    color:"var(--c-O)",
+    lowLabel:"Conventional",
+    highLabel:"Inventive / Curious",
+    desc:"Openness reflects intellectual curiosity, appreciation for art and ideas, and willingness to entertain unconventional or abstract thinking versus a preference for the familiar and concrete.",
+    high:"You're drawn to novelty, ideas, and imaginative or artistic thinking. You likely enjoy brainstorming, ambiguity, and questioning 'the way things have always been done.' This is a strong asset for innovation-heavy work, but can create friction when execution requires sticking to a fixed plan.",
+    low:"You favour the practical, familiar, and proven over the abstract or experimental. This often makes you a reliable, consistent executor who doesn't chase every new idea — a valuable counterweight to teams full of ideators. It's worth occasionally stress-testing your own assumptions, since comfort with the familiar can quietly become resistance to necessary change.",
+    work:"High Openness fuels innovation, creative strategy, and comfort with ambiguity — valuable in marketing, R&D, and entrepreneurship. Lower Openness supports operational consistency, compliance-heavy roles, and executing established processes reliably."
+  },
+  A:{
+    name:"Agreeableness",
+    tag:"Orientation Toward Others",
+    color:"var(--c-A)",
+    lowLabel:"Challenger",
+    highLabel:"Cooperative",
+    desc:"Agreeableness reflects the balance between prioritising harmony, trust, and others' needs versus prioritising one's own interests, directness, and healthy scepticism.",
+    high:"You're inclined to trust others, cooperate readily, and prioritise group harmony. This builds strong relationships and makes you a natural team glue — but be alert to the risk of over-accommodating or avoiding necessary confrontation, especially when giving critical feedback.",
+    low:"You're comfortable being direct, sceptical, and prioritising your own judgment over consensus. This makes you effective at negotiation, critical evaluation, and holding a position under pressure — but it's worth actively checking that directness isn't read as coldness by teammates who value warmth.",
+    work:"High Agreeableness suits roles built on trust, service, mentoring, and team cohesion. Lower Agreeableness is an asset in negotiation, auditing, critical review, and roles that require holding an unpopular but correct position."
+  },
+  C:{
+    name:"Conscientiousness",
+    tag:"Discipline & Reliability",
+    color:"var(--c-C)",
+    lowLabel:"Flexible / Spontaneous",
+    highLabel:"Organised / Disciplined",
+    desc:"Conscientiousness is the strongest single predictor of job performance across most roles: it reflects self-discipline, organisation, and follow-through on goals and obligations.",
+    high:"You're organised, dependable, and driven to follow through on commitments. This is consistently the trait most associated with strong academic and career performance — the main risk is rigidity or difficulty adapting when a plan needs to change quickly.",
+    low:"You favour flexibility and spontaneity over rigid planning, which can bring adaptability and comfort with last-minute change. The clear growth area is building small systems — checklists, deadlines, reminders — since structure doesn't come naturally and will need to be deliberately engineered rather than relied on as instinct.",
+    work:"Conscientiousness predicts performance across almost every profession — it drives reliability, quality control, and goal attainment. It's the trait most worth deliberately strengthening if it's your lowest score, since unlike Extraversion or Openness, its behaviours (planning, checklists, deadlines) are highly trainable."
+  }
+};
+
+/* ---------------- STATE ---------------- */
+let order = [];
+let answers = {};
+let current = 0;
+let studentName = "", studentClass = "";
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function startTest(){
+  studentName = document.getElementById('input-name').value.trim() || "Student";
+  studentClass = document.getElementById('input-class').value.trim();
+  order = shuffle(ITEMS.map(it=>it.n));
+  answers = {};
+  current = 0;
+  document.getElementById('screen-intro').style.display='none';
+  document.getElementById('screen-test').style.display='block';
+  renderQ();
+}
+
+function itemByNum(n){ return ITEMS.find(it=>it.n===n); }
+
+function renderQ(){
+  const num = order[current];
+  const item = itemByNum(num);
+  document.getElementById('qtext').textContent = item.t;
+  document.getElementById('progresstext').textContent = `Question ${current+1} of ${order.length}`;
+  const pct = Math.round(((current)/order.length)*100);
+  document.getElementById('progressfill').style.width = pct+"%";
+  document.getElementById('progresspct').textContent = pct+"%";
+  document.getElementById('backbtn').disabled = current===0;
+
+  const box = document.getElementById('choices');
+  box.innerHTML='';
+  CHOICES.forEach(c=>{
+    const div = document.createElement('div');
+    div.className = 'choice' + (answers[num]===c.v ? ' selected':'');
+    div.innerHTML = `<span class="dot"></span><span>${c.t}</span>`;
+    div.onclick = ()=>selectChoice(num,c.v);
+    box.appendChild(div);
+  });
+}
+
+function selectChoice(num,val){
+  answers[num]=val;
+  setTimeout(()=>{
+    if(current < order.length-1){
+      current++;
+      renderQ();
+    } else {
+      finish();
+    }
+  }, 180);
+}
+
+function skipQ(){
+  if(current < order.length-1){ current++; renderQ(); }
+  else { finish(); }
+}
+function prevQ(){
+  if(current>0){ current--; renderQ(); }
+}
+
+function finish(){
+  document.getElementById('screen-test').style.display='none';
+  const missing = order.filter(n=>!(n in answers));
+  if(missing.length>0){
+    // default any unanswered to neutral midpoint (3) so scoring stays complete
+    missing.forEach(n=>answers[n]=3);
+  }
+  renderReport();
+}
+
+/* ---------------- SCORING ---------------- */
+function computeScores(){
+  const facetScores = {}; // key "N1".."C6"
+  const domainScores = {};
+  ["N","E","O","A","C"].forEach(d=>{
+    domainScores[d]=0;
+    for(let f=1;f<=6;f++){
+      const items = ITEMS.filter(it=>it.d===d && it.f===f);
+      let sum=0;
+      items.forEach(it=>{
+        const raw = answers[it.n];
+        sum += it.k===1 ? raw : (6-raw);
+      });
+      facetScores[d+f]=sum;
+      domainScores[d]+=sum;
+    }
+  });
+  return {facetScores,domainScores};
+}
+
+function bandOf(score,min,max){
+  const pct = (score-min)/(max-min)*100;
+  if(pct<20) return {label:"Low",idx:0,pct};
+  if(pct<40) return {label:"Below Average",idx:1,pct};
+  if(pct<60) return {label:"Average",idx:2,pct};
+  if(pct<80) return {label:"Above Average",idx:3,pct};
+  return {label:"High",idx:4,pct};
+}
+
+/* ---------------- REPORT RENDER ---------------- */
+function renderReport(){
+  const {facetScores,domainScores} = computeScores();
+  const el = document.getElementById('screen-report');
+  el.style.display='block';
+
+  let html = `
+  <div class="reportheader">
+    <div class="brandbar" style="justify-content:center;">
+      <div class="mark">द</div>
+      <div class="brandtext" style="text-align:left;"><b>Learn with Dinesh Sir</b>Big Five Personality Report</div>
+    </div>
+    <h1>${escapeHtml(studentName)}'s OCEAN Profile</h1>
+    <p>${studentClass ? escapeHtml(studentClass)+" · " : ""}${new Date().toLocaleDateString('en-IN',{year:'numeric',month:'long',day:'numeric'})} · IPIP-NEO-120</p>
+  </div>`;
+
+  ["O","C","E","A","N"].forEach(d=>{
+    const meta = DOMAIN_META[d];
+    const score = domainScores[d];
+    const band = bandOf(score,24,120);
+    html += `
+    <div class="domainblock">
+      <div class="domainhead">
+        <div class="domainname">${meta.name} <span style="font-size:13px;color:#8a7660;font-weight:400;">— ${meta.tag}</span></div>
+        <div class="domainband" style="background:${meta.color}">${band.label}</div>
+      </div>
+      <div class="domaindesc">${meta.desc}</div>
+      <div class="spectrum">
+        <div class="spectrumfill" style="width:${band.pct}%;background:${meta.color};opacity:.35;"></div>
+        <div class="spectrummarker" style="left:calc(${band.pct}% - 2px);"></div>
+      </div>
+      <div class="spectrumlabels"><span>${meta.lowLabel}</span><span>${meta.highLabel}</span></div>
+      <div class="workblock">${band.idx>=3 ? meta.high : (band.idx<=1 ? meta.low : meta.high.slice(0,0) + "You sit near the middle of this trait — you flex between both ends depending on the situation, drawing on whichever mode the context calls for.")}</div>
+      <div class="workblock" style="border-color:var(--maroon);background:#fbeee9;"><b>At work:</b> ${meta.work}</div>
+      <div class="facetgrid" style="margin-top:18px;">
+        ${[1,2,3,4,5,6].map(f=>{
+          const fs = facetScores[d+f];
+          const fb = bandOf(fs,4,20);
+          const name = FACET_NAMES[d][f-1];
+          const note = fb.idx>=3 ? FACET_NOTES[d][f-1][1] : (fb.idx<=1 ? FACET_NOTES[d][f-1][0] : "Balances both tendencies depending on context.");
+          return `<div class="facetrow">
+            <div class="facetname">${name}</div>
+            <div class="facetbar"><div class="facetbarfill" style="width:${fb.pct}%;background:${meta.color};"></div></div>
+            <div class="facetscore">${fs}/20</div>
+            <div class="facetnote">${note}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  });
+
+  html += `
+  <div class="classroomsection">
+    <h2>Reading Your Own Profile</h2>
+    <p style="font-size:14.5px;color:#4a3b2c;">Scores here are calculated relative to the scale's own range (not compared against a national norm sample), so treat bands as a descriptive starting point for reflection, not a fixed label. Your personality also isn't static — it shifts meaningfully across contexts (work vs. home) and can change over years. Use this profile as one data point to reflect on, discuss with classmates, and revisit later in the course when we cover motivation, teams, and leadership.</p>
+  </div>
+
+  <div class="btnrow noprint" style="justify-content:center;margin-top:24px;">
+    <button class="btn" onclick="window.print()">Print / Save as PDF</button>
+    <button class="btn ghost" onclick="location.reload()">Start Over (Next Student)</button>
+  </div>
+  <p class="footer-note">Instrument: IPIP-NEO-120 (Johnson, 2014), built on the International Personality Item Pool (Goldberg et al., 2006), used under public-domain terms. This is a self-report educational screening tool, not a clinical or diagnostic assessment.</p>
+  `;
+  el.innerHTML = html;
+  window.scrollTo(0,0);
+}
+
+function escapeHtml(s){
+  return s.replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+</script>
+</body>
+</html>

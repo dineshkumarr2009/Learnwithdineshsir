@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Self-Awareness Index | Learn with Dinesh Sir</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap');
+
+:root {
+  --bg: #FAFAF8;
+  --card: #FFFFFF;
+  --text: #1A1A2E;
+  --text-secondary: #5A5A72;
+  --accent: #2D6A4F;
+  --accent-light: #D8F3DC;
+  --accent-dark: #1B4332;
+  --warm: #E07A5F;
+  --warm-light: #FDE8E0;
+  --blue: #457B9D;
+  --blue-light: #D6EAF8;
+  --purple: #7B5EA7;
+  --purple-light: #EDE7F6;
+  --gold: #D4A373;
+  --gold-light: #FEFAE0;
+  --border: #E8E8EC;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* ─── LANDING SCREEN ─── */
+.landing {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 32px 20px;
+}
+
+.landing-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.landing h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.landing h1 span {
+  color: var(--accent);
+}
+
+.landing-sub {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 380px;
+  margin-bottom: 28px;
+  line-height: 1.65;
+}
+
+.landing-stats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.landing-stat {
+  text-align: center;
+}
+
+.landing-stat .num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.landing-stat .label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 16px 40px;
+  border-radius: 100px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  letter-spacing: 0.02em;
+  width: 100%;
+  max-width: 320px;
+}
+
+.btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+
+.landing-footer {
+  margin-top: 28px;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 360px;
+}
+
+.landing-footer strong { color: var(--text); }
+
+/* ─── NAME INPUT ─── */
+.name-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 20px;
+  text-align: center;
+}
+
+.name-screen h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.name-screen p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+.name-input {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto 20px;
+  padding: 14px 20px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-family: inherit;
+  text-align: center;
+  transition: border 0.2s;
+  background: var(--card);
+}
+
+.name-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ─── SURVEY ─── */
+.survey-header {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  padding: 12px 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.progress-bar-track {
+  height: 6px;
+  background: var(--border);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+  border-radius: 100px;
+  transition: width 0.4s ease;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.progress-info .dim-label {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.question-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  animation: fadeUp 0.35s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.q-number {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.q-text {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--bg);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-family: inherit;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.option-btn:hover { border-color: var(--accent-light); background: var(--accent-light); }
+.option-btn.selected { border-color: var(--accent); background: var(--accent-light); font-weight: 600; }
+
+.option-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  border: 1.5px solid var(--border);
+}
+
+.option-btn.selected .option-num {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn-nav {
+  flex: 1;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.btn-back {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.btn-back:hover { border-color: var(--text-secondary); }
+
+.btn-next {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+}
+
+.btn-next:hover { background: var(--accent-dark); }
+.btn-next:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ─── REPORT ─── */
+.report { padding-bottom: 40px; }
+
+.report-hero {
+  text-align: center;
+  padding: 32px 16px 24px;
+  margin-bottom: 20px;
+}
+
+.report-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+.report-hero .subtitle {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.score-circle-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0;
+}
+
+.score-circle {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.score-circle svg {
+  transform: rotate(-90deg);
+  width: 180px;
+  height: 180px;
+}
+
+.score-circle .bg { stroke: var(--border); }
+.score-circle .fill {
+  stroke-dasharray: 502;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.5s ease;
+}
+
+.score-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-center .big {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.score-center .of {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.archetype-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.archetype-emoji { font-size: 2.5rem; margin-bottom: 8px; }
+
+.archetype-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+}
+
+.archetype-card p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.dim-section {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+}
+
+.dim-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.dim-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.dim-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.dim-score-badge {
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.dim-bar-track {
+  height: 10px;
+  background: var(--bg);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.dim-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  transition: width 1.2s ease;
+}
+
+.dim-interpretation {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.dim-level {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  margin: 28px 0 14px;
+}
+
+.eurich-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.eurich-cell {
+  background: var(--card);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.eurich-cell.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.eurich-cell .e-emoji { font-size: 1.4rem; margin-bottom: 4px; }
+.eurich-cell .e-name { font-weight: 700; font-size: 0.8rem; margin-bottom: 2px; }
+.eurich-cell .e-desc { font-size: 0.68rem; color: var(--text-secondary); line-height: 1.4; }
+
+/* ─── TRAINING SECTION ─── */
+.training-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+  border-left: 4px solid var(--accent);
+}
+
+.training-card h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.training-card p, .training-card ul {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.training-card ul {
+  padding-left: 18px;
+  margin-top: 6px;
+}
+
+.training-card li { margin-bottom: 4px; }
+
+.training-phase {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+
+.reference-box {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-top: 20px;
+  border: 1px solid var(--border);
+}
+
+.reference-box h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+.reference-box p {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+.branding {
+  text-align: center;
+  padding: 24px 0;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.branding strong { color: var(--accent-dark); }
+
+.print-btn {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 20px auto;
+  padding: 14px;
+  background: var(--text);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.retake-btn {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 8px auto;
+  padding: 14px;
+  background: var(--bg);
+  color: var(--text-secondary);
+  border: 2px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ─── TABS ─── */
+.tab-bar {
+  display: flex;
+  background: var(--card);
+  border-radius: var(--radius-sm);
+  padding: 4px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 8px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ─── SCREEN VISIBILITY ─── */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* ─── PRINT ─── */
+@media print {
+  body { background: #fff; }
+  .survey-header, .nav-buttons, .print-btn, .retake-btn, .btn-primary { display: none; }
+  .container { max-width: 100%; }
+  .dim-section, .archetype-card, .training-card { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- SCREEN 1: LANDING -->
+  <div class="screen active" id="screen-landing">
+    <div class="landing">
+      <div class="landing-badge">&#9670; Organisational Behaviour Module</div>
+      <h1>The <span>Self-Awareness</span> Index</h1>
+      <p class="landing-sub">A research-grounded survey to discover how well you know yourself, how others experience you, and where your growth edge lies.</p>
+      <div class="landing-stats">
+        <div class="landing-stat">
+          <div class="num">30</div>
+          <div class="label">Questions</div>
+        </div>
+        <div class="landing-stat">
+          <div class="num">6</div>
+          <div class="label">Dimensions</div>
+        </div>
+        <div class="landing-stat">
+          <div class="num">8</div>
+          <div class="label">Minutes</div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="showScreen('screen-name')">Begin the Survey</button>
+      <p class="landing-footer">Based on <strong>Daniel Goleman's</strong> Emotional Intelligence framework, <strong>Tasha Eurich's</strong> Internal-External Self-Awareness model, and <strong>CASEL's</strong> Social-Emotional Learning competencies.</p>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: NAME -->
+  <div class="screen" id="screen-name">
+    <div class="name-screen">
+      <h2>Before we start</h2>
+      <p>Your name will appear on your personal report.</p>
+      <input type="text" class="name-input" id="userName" placeholder="Enter your name" maxlength="40" autocomplete="off">
+      <button class="btn-primary" onclick="startSurvey()" style="max-width:360px;margin:0 auto;">Start Survey &rarr;</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: SURVEY -->
+  <div class="screen" id="screen-survey">
+    <div class="survey-header">
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-info">
+        <span class="dim-label" id="dimLabel"></span>
+        <span id="qCounter">1 / 30</span>
+      </div>
+    </div>
+    <div id="questionArea"></div>
+    <div class="nav-buttons">
+      <button class="btn-nav btn-back" id="btnBack" onclick="prevQ()" style="display:none">&#8592; Back</button>
+      <button class="btn-nav btn-next" id="btnNext" onclick="nextQ()" disabled>Next &rarr;</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: REPORT -->
+  <div class="screen" id="screen-report">
+    <div class="report" id="reportArea"></div>
+  </div>
+
+</div>
+
+<script>
+// ─── QUESTION DATA ───
+// Six dimensions, 5 items each = 30 items
+// Scale: 1 = Almost Never, 2 = Rarely, 3 = Sometimes, 4 = Often, 5 = Almost Always
+// Some items are reverse-scored (marked with rev:true)
+
+const dimensions = [
+  {
+    key: 'ER',
+    name: 'Emotional Recognition',
+    icon: '🪞',
+    color: '#2D6A4F',
+    colorLight: '#D8F3DC',
+    type: 'internal',
+    desc: 'Your ability to notice, name, and understand your own emotions as they happen.',
+    items: [
+      { text: 'I can name exactly what I am feeling (e.g., anxious vs. frustrated vs. disappointed) while the feeling is happening.', rev: false },
+      { text: 'I notice physical signals in my body (tight chest, clenched jaw, racing heart) that tell me I am becoming emotional.', rev: false },
+      { text: 'When my mood changes during the day, I usually know what triggered the shift.', rev: false },
+      { text: 'I often act on an emotion and only realise later what I was actually feeling.', rev: true },
+      { text: 'I can tell the difference between being tired, being stressed, and being genuinely upset.', rev: false }
+    ]
+  },
+  {
+    key: 'SA',
+    name: 'Accurate Self-Assessment',
+    icon: '⚖️',
+    color: '#457B9D',
+    colorLight: '#D6EAF8',
+    type: 'internal',
+    desc: 'How honestly you evaluate your own strengths, weaknesses, and areas for growth.',
+    items: [
+      { text: 'I can list three genuine strengths and three areas where I genuinely need improvement.', rev: false },
+      { text: 'When I receive negative feedback, I consider it carefully instead of dismissing it immediately.', rev: false },
+      { text: 'I tend to either overestimate or underestimate my abilities in academic or social situations.', rev: true },
+      { text: 'I actively ask friends, classmates, or mentors for honest opinions about my work or behaviour.', rev: false },
+      { text: 'I can accept that I was wrong about something without it damaging my sense of self-worth.', rev: false }
+    ]
+  },
+  {
+    key: 'SC',
+    name: 'Self-Confidence',
+    icon: '🔥',
+    color: '#E07A5F',
+    colorLight: '#FDE8E0',
+    type: 'internal',
+    desc: 'Your sense of self-worth and belief in your capacity, independent of external validation.',
+    items: [
+      { text: 'I feel capable of handling new challenges even when I have not done them before.', rev: false },
+      { text: 'I can voice my opinion in a group even when I know others might disagree.', rev: false },
+      { text: 'My self-worth depends heavily on likes, grades, or other people\'s approval.', rev: true },
+      { text: 'When I fail at something, I see it as information about what to try differently, not as proof that I am incapable.', rev: false },
+      { text: 'I can say "I don\'t know" without feeling embarrassed.', rev: false }
+    ]
+  },
+  {
+    key: 'VP',
+    name: 'Values & Purpose Clarity',
+    icon: '🧭',
+    color: '#7B5EA7',
+    colorLight: '#EDE7F6',
+    type: 'internal',
+    desc: 'How clearly you know what matters to you, what drives your decisions, and where you want to go.',
+    items: [
+      { text: 'I can describe two or three core values that guide my major decisions.', rev: false },
+      { text: 'When I make choices about my career or studies, I base them on what genuinely interests me rather than just what looks impressive.', rev: false },
+      { text: 'I often feel confused about what I really want from life.', rev: true },
+      { text: 'I can explain why I chose my current course of study in a way that connects to my personal goals.', rev: false },
+      { text: 'I know what kind of work environment or lifestyle would make me feel fulfilled.', rev: false }
+    ]
+  },
+  {
+    key: 'IA',
+    name: 'Impact Awareness',
+    icon: '👥',
+    color: '#D4A373',
+    colorLight: '#FEFAE0',
+    type: 'external',
+    desc: 'How well you understand your effect on others, including how your words, tone, and actions land.',
+    items: [
+      { text: 'I notice when something I said made someone uncomfortable, even if they did not say so directly.', rev: false },
+      { text: 'I am often surprised when someone tells me how my behaviour affected them.', rev: true },
+      { text: 'Before speaking in a tense moment, I think about how my words will land on the other person.', rev: false },
+      { text: 'I adjust my communication style depending on whether I am talking to a friend, a teacher, or a stranger.', rev: false },
+      { text: 'People close to me would say I understand how I come across to others.', rev: false }
+    ]
+  },
+  {
+    key: 'RP',
+    name: 'Reflective Practice',
+    icon: '📓',
+    color: '#457B9D',
+    colorLight: '#D6EAF8',
+    type: 'both',
+    desc: 'Your habit of regularly stepping back, reviewing your experiences, and extracting lessons from them.',
+    items: [
+      { text: 'After a significant event (exam, argument, interview), I mentally review what went well and what I could improve.', rev: false },
+      { text: 'I set aside time (journaling, quiet thought, conversation) to reflect on my experiences.', rev: false },
+      { text: 'I tend to move quickly from one experience to the next without pausing to think about what happened.', rev: true },
+      { text: 'I have changed a habit or behaviour because of something I learned about myself through reflection.', rev: false },
+      { text: 'When a pattern keeps repeating in my life (same kind of conflict, same kind of stress), I try to understand what I am contributing to it.', rev: false }
+    ]
+  }
+];
+
+const scaleLabels = [
+  'Almost Never',
+  'Rarely',
+  'Sometimes',
+  'Often',
+  'Almost Always'
+];
+
+// Flatten items with dimension reference
+let allItems = [];
+dimensions.forEach(d => {
+  d.items.forEach((item, idx) => {
+    allItems.push({ ...item, dimKey: d.key, dimName: d.name, localIdx: idx });
+  });
+});
+
+let currentQ = 0;
+let answers = new Array(30).fill(null);
+let userName = '';
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function startSurvey() {
+  userName = document.getElementById('userName').value.trim() || 'Student';
+  showScreen('screen-survey');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const item = allItems[currentQ];
+  const dim = dimensions.find(d => d.key === item.dimKey);
+  
+  document.getElementById('progressFill').style.width = ((currentQ + 1) / 30 * 100) + '%';
+  document.getElementById('qCounter').textContent = (currentQ + 1) + ' / 30';
+  document.getElementById('dimLabel').textContent = dim.name;
+  document.getElementById('btnBack').style.display = currentQ === 0 ? 'none' : 'block';
+  
+  const isLast = currentQ === 29;
+  document.getElementById('btnNext').textContent = isLast ? 'See My Report →' : 'Next →';
+  document.getElementById('btnNext').disabled = answers[currentQ] === null;
+
+  let optionsHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const selected = answers[currentQ] === i ? 'selected' : '';
+    optionsHTML += `
+      <button class="option-btn ${selected}" onclick="selectAnswer(${i})">
+        <span class="option-num">${i + 1}</span>
+        ${scaleLabels[i]}
+      </button>`;
+  }
+
+  document.getElementById('questionArea').innerHTML = `
+    <div class="question-card">
+      <div class="q-number">${dim.name} &middot; Q${currentQ + 1}</div>
+      <div class="q-text">${item.text}</div>
+      <div class="options">${optionsHTML}</div>
+    </div>`;
+}
+
+function selectAnswer(val) {
+  answers[currentQ] = val;
+  document.getElementById('btnNext').disabled = false;
+  renderQuestion();
+}
+
+function nextQ() {
+  if (answers[currentQ] === null) return;
+  if (currentQ < 29) {
+    currentQ++;
+    renderQuestion();
+    window.scrollTo(0, 0);
+  } else {
+    generateReport();
+  }
+}
+
+function prevQ() {
+  if (currentQ > 0) {
+    currentQ--;
+    renderQuestion();
+    window.scrollTo(0, 0);
+  }
+}
+
+function generateReport() {
+  // Calculate scores per dimension
+  const dimScores = {};
+  dimensions.forEach(d => {
+    let total = 0;
+    let startIdx = allItems.findIndex(i => i.dimKey === d.key);
+    for (let i = 0; i < 5; i++) {
+      let raw = answers[startIdx + i] + 1; // 1-5
+      if (d.items[i].rev) raw = 6 - raw;
+      total += raw;
+    }
+    dimScores[d.key] = total; // out of 25
+  });
+
+  const totalScore = Object.values(dimScores).reduce((a, b) => a + b, 0); // out of 150
+  const pct = Math.round(totalScore / 150 * 100);
+
+  // Internal score (ER + SA + SC + VP)
+  const internalScore = dimScores.ER + dimScores.SA + dimScores.SC + dimScores.VP;
+  const internalPct = Math.round(internalScore / 100 * 100);
+  // External score (IA + RP partly)
+  const externalScore = dimScores.IA + dimScores.RP;
+  const externalPct = Math.round(externalScore / 50 * 100);
+
+  // Eurich Archetype
+  const internalHigh = internalPct >= 65;
+  const externalHigh = externalPct >= 65;
+  let archetype, archDesc, archEmoji;
+  if (internalHigh && externalHigh) {
+    archetype = 'Aware';
+    archEmoji = '🌟';
+    archDesc = 'You have strong clarity about who you are AND a good understanding of how others experience you. This is the rarest and most powerful combination. Keep sharpening both edges.';
+  } else if (internalHigh && !externalHigh) {
+    archetype = 'Introspector';
+    archEmoji = '🔍';
+    archDesc = 'You know yourself well internally, your values, feelings, and patterns, but may have blind spots about how your behaviour lands on others. Your growth edge: actively seek honest feedback from people you trust.';
+  } else if (!internalHigh && externalHigh) {
+    archetype = 'Pleaser';
+    archEmoji = '🎭';
+    archDesc = 'You are attuned to how others perceive you, but may have lost touch with your own needs, values, and feelings. Your growth edge: spend time in solitary reflection asking "What do I actually want?"';
+  } else {
+    archetype = 'Seeker';
+    archEmoji = '🌱';
+    archDesc = 'You are at the beginning of your self-awareness journey, and that is perfectly okay. Every self-aware person started here. Your growth edge: start small with daily emotional check-ins and one honest conversation a week.';
+  }
+
+  function getLevel(score) {
+    const p = score / 25 * 100;
+    if (p >= 80) return { label: 'Strong', cls: 'background:var(--accent-light);color:var(--accent-dark)' };
+    if (p >= 60) return { label: 'Developing', cls: 'background:var(--blue-light);color:var(--blue)' };
+    if (p >= 40) return { label: 'Emerging', cls: 'background:var(--gold-light);color:#8B6914' };
+    return { label: 'Beginning', cls: 'background:var(--warm-light);color:var(--warm)' };
+  }
+
+  function getInterpretation(key, score) {
+    const p = score / 25 * 100;
+    const interps = {
+      ER: {
+        high: 'You can label your emotions with precision while they are happening. This real-time emotional literacy gives you a significant edge in decision-making and relationships.',
+        mid: 'You catch some emotions as they arise but others slip by unnoticed. Building a richer vocabulary of feelings will sharpen this skill.',
+        low: 'Emotions often hit you without a clear label. Start with a simple check-in three times a day: "What am I feeling right now?" Name it, even roughly.'
+      },
+      SA: {
+        high: 'You hold an honest, balanced picture of your strengths and gaps. This intellectual humility makes you highly coachable and adaptive.',
+        mid: 'You have a general sense of your abilities but may lean toward overconfidence or self-doubt in certain areas. Structured feedback helps.',
+        low: 'You may be operating with an inaccurate self-image. Seeking feedback from trusted peers and mentors is the fastest path to clarity.'
+      },
+      SC: {
+        high: 'Your self-worth comes from within, not from grades, likes, or approval. This inner anchor helps you take risks and bounce back from setbacks.',
+        mid: 'Your confidence fluctuates with circumstances. Identifying what specifically triggers self-doubt will help you build a more stable foundation.',
+        low: 'Your sense of worth may be overly tied to external validation. A daily practice of noting one thing you handled well can gradually rewire this pattern.'
+      },
+      VP: {
+        high: 'You have a clear sense of what matters to you and where you are heading. This clarity acts as a compass for difficult decisions.',
+        mid: 'You have some sense of direction but may still be sorting out what really drives you versus what others expect. This is a natural phase.',
+        low: 'You may feel adrift or pulled in many directions. Start by noticing what activities make you lose track of time, as those point toward your core interests.'
+      },
+      IA: {
+        high: 'You read how your words and actions land on others with strong accuracy. This social perception is a cornerstone of effective leadership and relationships.',
+        mid: 'You catch obvious social signals but miss subtler cues. Asking "How did that land?" after important conversations can accelerate this skill.',
+        low: 'You may be frequently surprised by others\' reactions to you. Start by observing body language in conversations and asking one trusted person for regular, honest feedback.'
+      },
+      RP: {
+        high: 'You have a regular practice of looking back, extracting lessons, and adjusting. This meta-cognitive habit compounds over time and accelerates growth.',
+        mid: 'You reflect sometimes but not consistently. Scheduling even five minutes of daily review can turn occasional reflection into a growth engine.',
+        low: 'You tend to move from experience to experience without pausing. The single highest-leverage habit you can build right now is a short nightly review.'
+      }
+    };
+    if (p >= 70) return interps[key].high;
+    if (p >= 45) return interps[key].mid;
+    return interps[key].low;
+  }
+
+  // Sort dimensions by score for strengths/growth
+  const sorted = dimensions.map(d => ({ ...d, score: dimScores[d.key] })).sort((a, b) => b.score - a.score);
+  const topTwo = sorted.slice(0, 2);
+  const bottomTwo = sorted.slice(-2).reverse();
+
+  // Build stroke offset for circle
+  const circumference = 502;
+  const offset = circumference - (pct / 100 * circumference);
+
+  let scoreColor = pct >= 70 ? 'var(--accent)' : pct >= 45 ? 'var(--blue)' : 'var(--warm)';
+
+  let html = `
+    <div class="report-hero">
+      <h1>${userName}'s Report</h1>
+      <p class="subtitle">Self-Awareness Index &middot; ${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+    </div>
+
+    <div class="score-circle-wrap">
+      <div class="score-circle">
+        <svg viewBox="0 0 180 180">
+          <circle class="bg" cx="90" cy="90" r="80" fill="none" stroke-width="12"/>
+          <circle class="fill" cx="90" cy="90" r="80" fill="none" stroke="${scoreColor}" stroke-width="12"
+            stroke-dashoffset="${offset}"/>
+        </svg>
+        <div class="score-center">
+          <div class="big" style="color:${scoreColor}">${totalScore}</div>
+          <div class="of">out of 150</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="archetype-card">
+      <div class="archetype-emoji">${archEmoji}</div>
+      <h3>Your Archetype: ${archetype}</h3>
+      <p>${archDesc}</p>
+      <p style="margin-top:10px;font-size:0.72rem;color:var(--accent);">Based on Tasha Eurich's Internal-External Self-Awareness Model</p>
+    </div>
+
+    <h3 class="section-title">Eurich's Self-Awareness Matrix</h3>
+    <div class="eurich-grid">
+      <div class="eurich-cell ${archetype === 'Aware' ? 'active' : ''}">
+        <div class="e-emoji">🌟</div>
+        <div class="e-name">Aware</div>
+        <div class="e-desc">High Internal + High External</div>
+      </div>
+      <div class="eurich-cell ${archetype === 'Pleaser' ? 'active' : ''}">
+        <div class="e-emoji">🎭</div>
+        <div class="e-name">Pleaser</div>
+        <div class="e-desc">Low Internal + High External</div>
+      </div>
+      <div class="eurich-cell ${archetype === 'Introspector' ? 'active' : ''}">
+        <div class="e-emoji">🔍</div>
+        <div class="e-name">Introspector</div>
+        <div class="e-desc">High Internal + Low External</div>
+      </div>
+      <div class="eurich-cell ${archetype === 'Seeker' ? 'active' : ''}">
+        <div class="e-emoji">🌱</div>
+        <div class="e-name">Seeker</div>
+        <div class="e-desc">Low Internal + Low External</div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Your Six Dimensions</h3>`;
+
+  // Dimension cards
+  dimensions.forEach(d => {
+    const score = dimScores[d.key];
+    const p = Math.round(score / 25 * 100);
+    const level = getLevel(score);
+    const interp = getInterpretation(d.key, score);
+    html += `
+      <div class="dim-section">
+        <div class="dim-header">
+          <div class="dim-name">
+            <span class="dim-icon" style="background:${d.colorLight}">${d.icon}</span>
+            ${d.name}
+          </div>
+          <div class="dim-score-badge" style="color:${d.color}">${score}/25</div>
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width:${p}%;background:${d.color}"></div>
+        </div>
+        <div class="dim-level" style="${level.cls}">${level.label}</div>
+        <p class="dim-interpretation">${interp}</p>
+      </div>`;
+  });
+
+  // Strengths & Growth
+  html += `
+    <h3 class="section-title">At a Glance</h3>
+    <div class="dim-section">
+      <div style="margin-bottom:12px;">
+        <div class="q-number" style="color:var(--accent)">🏆 Your Top Strengths</div>
+        <p class="dim-interpretation">${topTwo.map(d => '<strong>' + d.name + '</strong> (' + d.score + '/25)').join(' and ')} are where you are most developed. Lean into these and use them to support your weaker areas.</p>
+      </div>
+      <div>
+        <div class="q-number" style="color:var(--warm)">🎯 Your Growth Edges</div>
+        <p class="dim-interpretation">${bottomTwo.map(d => '<strong>' + d.name + '</strong> (' + d.score + '/25)').join(' and ')} offer the most room for growth. Even small, consistent effort here will produce noticeable results.</p>
+      </div>
+    </div>`;
+
+  // TAB BAR for Report vs Training
+  html += `
+    <h3 class="section-title">Building Self-Awareness</h3>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('tab-personal')">Your Plan</button>
+      <button class="tab-btn" onclick="switchTab('tab-classroom')">Classroom Activities</button>
+      <button class="tab-btn" onclick="switchTab('tab-resources')">Resources</button>
+    </div>
+
+    <!-- TAB: PERSONAL PLAN -->
+    <div class="tab-content active" id="tab-personal">
+      <div class="training-phase">Phase 1 &middot; Weeks 1-2 &middot; Notice</div>
+      <div class="training-card" style="border-left-color:var(--accent)">
+        <h4>🪞 Emotional Check-In Practice</h4>
+        <p>Three times daily (morning, midday, evening), pause for 60 seconds and ask:</p>
+        <ul>
+          <li><strong>"What am I feeling right now?"</strong> (name the emotion)</li>
+          <li><strong>"What triggered this?"</strong> (event, thought, person)</li>
+          <li><strong>"Where do I feel it in my body?"</strong> (stomach, chest, jaw)</li>
+        </ul>
+        <p style="margin-top:6px;">Record your answers in a notes app or journal. After 14 days, review for patterns.</p>
+      </div>
+
+      <div class="training-card" style="border-left-color:var(--blue)">
+        <h4>📝 The "What, Not Why" Journal</h4>
+        <p>Adapted from Tasha Eurich's research: replace "Why?" questions with "What?" questions to avoid unproductive rumination.</p>
+        <ul>
+          <li>Instead of "Why did I fail?" ask <strong>"What factors contributed to this result?"</strong></li>
+          <li>Instead of "Why am I anxious?" ask <strong>"What situations trigger my anxiety?"</strong></li>
+          <li>Instead of "Why don't they like me?" ask <strong>"What am I doing that might create distance?"</strong></li>
+        </ul>
+        <p style="margin-top:6px;">Write one "What" reflection each night before bed.</p>
+      </div>
+
+      <div class="training-phase">Phase 2 &middot; Weeks 3-4 &middot; Understand</div>
+      <div class="training-card" style="border-left-color:var(--purple)">
+        <h4>🧭 Values Mapping Exercise</h4>
+        <p>List 10 values (honesty, freedom, family, achievement, creativity, etc.). Narrow to your top 3. For each, write:</p>
+        <ul>
+          <li>A real moment when you honoured this value</li>
+          <li>A real moment when you violated it and how it felt</li>
+          <li>One decision this week where this value should guide you</li>
+        </ul>
+      </div>
+
+      <div class="training-card" style="border-left-color:var(--gold)">
+        <h4>👥 The Loving Critic Conversation</h4>
+        <p>Eurich's research shows the most self-aware people seek feedback from "loving critics," people who care about them AND will be honest.</p>
+        <ul>
+          <li>Choose 2-3 people you trust deeply</li>
+          <li>Ask: <strong>"What do I do that is most helpful? What do I do that is most annoying or unhelpful?"</strong></li>
+          <li>Listen without defending. Take notes. Reflect later.</li>
+        </ul>
+      </div>
+
+      <div class="training-phase">Phase 3 &middot; Weeks 5-8 &middot; Act</div>
+      <div class="training-card" style="border-left-color:var(--warm)">
+        <h4>🔥 Strengths in Action Plan</h4>
+        <p>Using your top 2 dimensions from the report:</p>
+        <ul>
+          <li>Identify 1 academic and 1 personal situation where you can deliberately apply each strength this week</li>
+          <li>At week's end, assess: did using the strength intentionally change the outcome?</li>
+          <li>Share what you learned with a study partner or mentor</li>
+        </ul>
+      </div>
+
+      <div class="training-card" style="border-left-color:var(--accent)">
+        <h4>🎯 Growth Edge Micro-Experiment</h4>
+        <p>Pick your lowest-scoring dimension. Design one small experiment:</p>
+        <ul>
+          <li><strong>If Emotional Recognition is low:</strong> Set 3 phone alarms daily labelled "How am I feeling?"</li>
+          <li><strong>If Self-Assessment is low:</strong> After every assignment, write what you did well and what you would change before seeing the grade</li>
+          <li><strong>If Self-Confidence is low:</strong> Each day, complete one small task slightly outside your comfort zone and note how it felt</li>
+          <li><strong>If Values Clarity is low:</strong> Say no to one commitment this week that does not align with what you care about</li>
+          <li><strong>If Impact Awareness is low:</strong> After each important conversation, ask the other person "How did that land?"</li>
+          <li><strong>If Reflective Practice is low:</strong> Spend 5 minutes every evening writing three things from today and what they taught you</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB: CLASSROOM ACTIVITIES -->
+    <div class="tab-content" id="tab-classroom">
+      <div class="training-card" style="border-left-color:var(--accent)">
+        <h4>🎬 Movie Clip Trigger Analysis</h4>
+        <p>Play a 3-5 minute clip where a character faces a high-emotion decision (e.g., a confrontation, a dilemma). Pause and ask students to write:</p>
+        <ul>
+          <li>What is the character feeling? (Emotional Recognition)</li>
+          <li>Does the character see themselves accurately? (Self-Assessment)</li>
+          <li>What would YOU feel in that situation? (Personal connection)</li>
+        </ul>
+        <p style="margin-top:6px;">Follow with pair sharing. This anchors abstract theory to lived emotion.</p>
+      </div>
+
+      <div class="training-card" style="border-left-color:var(--blue)">
+        <h4>💬 Fishbowl Feedback Round</h4>
+        <p>One student sits in the centre. The surrounding circle shares one genuine strength they have observed in that person. The person in the centre only listens and notes reactions in their body.</p>
+        <p style="margin-top:4px;">Debrief: "Was any feedback surprising? Did your body react to any comment?" This builds both Impact Awareness and Emotional Recognition simultaneously.</p>
+      </div>
+
+      <div class="training-card" style="border-left-color:var(--purple)">
+        <h4>🗺️ Values Auction</h4>
+        <p>Give each student ₹1000 of play money and auction 15 values (integrity, adventure, wealth, creativity, family, etc.). Students bid on what matters most. Debrief what they fought for, what they let go, and what surprised them about their own choices.</p>
+      </div>
+
+      <div class="training-card" style="border-left-color:var(--warm)">
+        <h4>📊 Rose-Thorn-Bud Weekly Check-In</h4>
+        <p>Every class opens with a 2-minute written check-in:</p>
+        <ul>
+          <li><strong>Rose:</strong> One positive thing from this week</li>
+          <li><strong>Thorn:</strong> One challenge or difficulty</li>
+          <li><strong>Bud:</strong> One thing you are looking forward to or curious about</li>
+        </ul>
+        <p style="margin-top:4px;">Optional sharing in pairs. Over a semester, students build a reflective habit and recognise emotional patterns.</p>
+      </div>
+
+      <div class="training-card" style="border-left-color:var(--gold)">
+        <h4>🎭 Emotion Charades + Vocabulary Builder</h4>
+        <p>Students act out emotions (not just "happy" or "sad" but "overwhelmed", "conflicted", "nostalgic", "resentful"). Class guesses and discusses: when do we actually feel this? This builds the emotional granularity that research links to better regulation.</p>
+      </div>
+
+      <div class="training-card" style="border-left-color:var(--accent)">
+        <h4>📱 The 21-Day Self-Awareness Challenge</h4>
+        <p>Run as a class-wide challenge using a shared spreadsheet or WhatsApp group:</p>
+        <ul>
+          <li>Days 1-7: Emotional check-in (name one emotion daily)</li>
+          <li>Days 8-14: Strengths spotting (notice one strength you used each day)</li>
+          <li>Days 15-21: Impact awareness (ask one person per day how something you did affected them)</li>
+        </ul>
+        <p style="margin-top:4px;">End with a class reflection session: "What surprised you about yourself?"</p>
+      </div>
+    </div>
+
+    <!-- TAB: RESOURCES -->
+    <div class="tab-content" id="tab-resources">
+      <div class="training-card" style="border-left-color:var(--text)">
+        <h4>📚 Recommended Readings & Talks</h4>
+        <ul>
+          <li><strong>TED Talk:</strong> Tasha Eurich, "Increase Your Self-Awareness with One Simple Fix" (16 min)</li>
+          <li><strong>Book:</strong> Daniel Goleman, <em>Emotional Intelligence</em> (1995), Chapters 4-5 on Self-Awareness</li>
+          <li><strong>Book:</strong> Tasha Eurich, <em>Insight</em> (2017), the definitive guide on internal vs external self-awareness</li>
+          <li><strong>HBR Article:</strong> "What Self-Awareness Really Is" by Tasha Eurich (2018)</li>
+          <li><strong>TED Talk:</strong> Daniel Goleman, "Why Aren't We All Good Samaritans?" (on attention and empathy)</li>
+          <li><strong>Framework:</strong> CASEL's Self-Awareness Competency Guide (casel.org)</li>
+        </ul>
+      </div>
+
+      <div class="reference-box">
+        <h4>Research Foundation for This Survey</h4>
+        <p>This instrument draws on three evidence-based frameworks:</p>
+        <p><strong>1. Goleman's EI Model (1995, 1998):</strong> Self-awareness as the foundation of emotional intelligence, comprising emotional awareness, accurate self-assessment, and self-confidence.</p>
+        <p><strong>2. Eurich's Internal-External Model (2017, 2018):</strong> The distinction between knowing yourself (internal) and understanding how others perceive you (external), with four archetypes: Seeker, Introspector, Pleaser, Aware.</p>
+        <p><strong>3. CASEL SEL Framework:</strong> Self-awareness as the first of five core social-emotional competencies, including identifying emotions, recognising strengths, self-confidence, and self-efficacy.</p>
+        <p style="margin-top:8px;font-style:italic;">Note: This is a classroom learning tool designed to promote self-reflection among students. It is not a clinical diagnostic instrument. For validated psychometric assessment, refer to the Schutte Self-Report EI Scale (SSREI-33) or the Emotional Intelligence Appraisal (Bradberry & Greaves).</p>
+      </div>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">📄 Save as PDF / Print</button>
+    <button class="retake-btn" onclick="retake()">↻ Retake the Survey</button>
+
+    <div class="branding">
+      <strong>Learn with Dinesh Sir</strong><br>
+      Self-Awareness Index &middot; Organisational Behaviour Module<br>
+      "Be inspired and keep inspiring."
+    </div>`;
+
+  document.getElementById('reportArea').innerHTML = html;
+  showScreen('screen-report');
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function retake() {
+  currentQ = 0;
+  answers = new Array(30).fill(null);
+  showScreen('screen-landing');
+}
+</script>
+</body>
+</html>

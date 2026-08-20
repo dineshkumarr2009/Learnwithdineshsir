@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Know Your Self-Awareness Type | Learn with Dinesh Sir</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Fraunces:wght@700;800;900&display=swap');
+
+:root {
+  --bg: #F7F5F0;
+  --card: #FFFFFF;
+  --text: #1C1C28;
+  --text-mid: #484860;
+  --text-light: #7A7A8E;
+  --seeker: #6C9B7D;
+  --seeker-light: #E8F5ED;
+  --seeker-dark: #3D6B4E;
+  --introspector: #5B7DB1;
+  --introspector-light: #E3ECF7;
+  --introspector-dark: #2E4A72;
+  --pleaser: #C17D59;
+  --pleaser-light: #FDF0E8;
+  --pleaser-dark: #7A4A2E;
+  --aware: #8B6BAE;
+  --aware-light: #F0E8F7;
+  --aware-dark: #5A3D7A;
+  --warm: #E07A5F;
+  --border: #E6E3DC;
+  --shadow: 0 4px 20px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
+  --r: 20px;
+  --rs: 12px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{max-width:560px;margin:0 auto;padding:0 16px;}
+
+/* ── HERO ── */
+.hero{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(160deg,#1C1C28 0%,#2E3A50 50%,#3D4F6B 100%);
+  padding:48px 24px 40px;
+  text-align:center;
+  color:#fff;
+}
+
+.hero-glow{
+  position:absolute;
+  width:300px;height:300px;
+  border-radius:50%;
+  filter:blur(80px);
+  opacity:0.3;
+  pointer-events:none;
+}
+.hero-glow-1{background:#8B6BAE;top:-80px;left:-60px;}
+.hero-glow-2{background:#6C9B7D;bottom:-100px;right:-80px;}
+
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(10px);
+  padding:6px 16px;
+  border-radius:100px;
+  font-size:0.7rem;
+  font-weight:600;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  margin-bottom:20px;
+  color:rgba(255,255,255,0.85);
+}
+
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-size:2rem;
+  font-weight:900;
+  line-height:1.15;
+  margin-bottom:14px;
+}
+
+.hero p{
+  font-size:0.92rem;
+  color:rgba(255,255,255,0.75);
+  max-width:400px;
+  margin:0 auto 24px;
+  line-height:1.6;
+}
+
+.hero-stat-row{
+  display:flex;
+  justify-content:center;
+  gap:32px;
+  margin-bottom:6px;
+}
+.hero-stat .n{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:900;color:#fff;}
+.hero-stat .l{font-size:0.65rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.06em;}
+
+.hero-credit{
+  font-size:0.68rem;
+  color:rgba(255,255,255,0.4);
+  margin-top:16px;
+}
+
+/* ── SECTION HEADERS ── */
+.sec{padding:32px 0 0;}
+
+.sec-label{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:0.65rem;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--text-light);
+  margin-bottom:8px;
+}
+
+.sec h2{
+  font-family:'Fraunces',serif;
+  font-size:1.5rem;
+  font-weight:800;
+  line-height:1.2;
+  margin-bottom:12px;
+}
+
+.sec > p{
+  font-size:0.88rem;
+  color:var(--text-mid);
+  margin-bottom:20px;
+}
+
+/* ── QUOTE CALLOUT ── */
+.callout{
+  background:var(--card);
+  border-radius:var(--r);
+  padding:24px 20px;
+  box-shadow:var(--shadow);
+  margin-bottom:24px;
+  position:relative;
+  border-left:4px solid var(--aware);
+}
+
+.callout-icon{
+  font-size:2rem;
+  line-height:1;
+  margin-bottom:8px;
+}
+
+.callout p{
+  font-size:0.88rem;
+  color:var(--text-mid);
+  line-height:1.65;
+}
+
+.callout .highlight{
+  color:var(--text);
+  font-weight:700;
+}
+
+/* ── THE 2x2 MATRIX ── */
+.matrix-visual{
+  background:var(--card);
+  border-radius:var(--r);
+  padding:20px 16px;
+  box-shadow:var(--shadow);
+  margin-bottom:28px;
+}
+
+.matrix-title{
+  font-weight:700;
+  font-size:0.8rem;
+  text-align:center;
+  margin-bottom:4px;
+  color:var(--text-mid);
+}
+
+.matrix-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  position:relative;
+}
+
+.matrix-cell{
+  border-radius:var(--rs);
+  padding:16px 12px;
+  text-align:center;
+  transition:transform 0.2s;
+  cursor:default;
+}
+.matrix-cell:hover{transform:scale(1.02);}
+
+.matrix-cell .m-emoji{font-size:2rem;margin-bottom:4px;}
+.matrix-cell .m-name{font-weight:800;font-size:0.85rem;margin-bottom:2px;}
+.matrix-cell .m-sub{font-size:0.65rem;opacity:0.7;line-height:1.3;}
+
+.matrix-axis{
+  display:flex;
+  justify-content:space-between;
+  font-size:0.6rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color:var(--text-light);
+  padding:0 4px;
+}
+.matrix-axis.y{
+  flex-direction:column;
+  position:absolute;
+  left:-2px;
+  top:0;
+  bottom:0;
+  justify-content:space-around;
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  display:none;
+}
+
+/* ── ARCHETYPE DEEP-DIVE CARDS ── */
+.arch-card{
+  background:var(--card);
+  border-radius:var(--r);
+  box-shadow:var(--shadow);
+  margin-bottom:20px;
+  overflow:hidden;
+}
+
+.arch-header{
+  padding:24px 20px 16px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.arch-avatar{
+  width:72px;height:72px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+
+.arch-avatar svg{width:48px;height:48px;}
+
+.arch-meta h3{
+  font-family:'Fraunces',serif;
+  font-size:1.2rem;
+  font-weight:800;
+  margin-bottom:2px;
+}
+
+.arch-tag{
+  display:inline-block;
+  padding:2px 10px;
+  border-radius:100px;
+  font-size:0.65rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+}
+
+.arch-body{padding:0 20px 20px;}
+
+.arch-desc{
+  font-size:0.88rem;
+  color:var(--text-mid);
+  margin-bottom:16px;
+  line-height:1.65;
+}
+
+.arch-who{
+  background:var(--bg);
+  border-radius:var(--rs);
+  padding:14px 16px;
+  margin-bottom:14px;
+}
+
+.arch-who-title{
+  font-weight:700;
+  font-size:0.75rem;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  margin-bottom:6px;
+}
+
+.arch-who p{
+  font-size:0.82rem;
+  color:var(--text-mid);
+  line-height:1.6;
+}
+
+.arch-section-title{
+  font-weight:700;
+  font-size:0.78rem;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  margin-bottom:8px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.tip-box{
+  border-radius:var(--rs);
+  padding:14px 16px;
+  margin-bottom:12px;
+}
+
+.tip-box p{
+  font-size:0.82rem;
+  color:var(--text-mid);
+  line-height:1.6;
+}
+
+.tip-box strong{color:var(--text);}
+
+.growth-steps{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-bottom:16px;
+}
+
+.growth-step{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  padding:12px 14px;
+  background:var(--bg);
+  border-radius:var(--rs);
+}
+
+.step-num{
+  width:26px;height:26px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:0.7rem;
+  font-weight:800;
+  color:#fff;
+  flex-shrink:0;
+  margin-top:2px;
+}
+
+.step-text{
+  font-size:0.82rem;
+  color:var(--text-mid);
+  line-height:1.55;
+}
+
+.myth-box{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  padding:12px 14px;
+  background:#FFF5F5;
+  border-radius:var(--rs);
+  margin-bottom:12px;
+  border:1px solid #FFE0E0;
+}
+
+.myth-icon{font-size:1.1rem;flex-shrink:0;margin-top:2px;}
+
+.myth-text{font-size:0.8rem;color:var(--text-mid);line-height:1.55;}
+.myth-text strong{color:#C0392B;}
+
+.truth-box{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  padding:12px 14px;
+  background:#F0FAF0;
+  border-radius:var(--rs);
+  margin-bottom:16px;
+  border:1px solid #C8E6C9;
+}
+.truth-text{font-size:0.8rem;color:var(--text-mid);line-height:1.55;}
+.truth-text strong{color:var(--seeker-dark);}
+
+/* ── WHY SECTION ── */
+.why-grid{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-bottom:24px;
+}
+
+.why-card{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--card);
+  border-radius:var(--rs);
+  padding:16px;
+  box-shadow:var(--shadow);
+}
+
+.why-icon{
+  width:44px;height:44px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.4rem;
+  flex-shrink:0;
+}
+
+.why-content h4{font-size:0.88rem;font-weight:700;margin-bottom:3px;}
+.why-content p{font-size:0.8rem;color:var(--text-mid);line-height:1.55;}
+
+/* ── SENSITIVITY NOTE ── */
+.sensitive-banner{
+  background:linear-gradient(135deg,#2E3A50,#3D4F6B);
+  border-radius:var(--r);
+  padding:24px 20px;
+  color:#fff;
+  margin-bottom:24px;
+}
+
+.sensitive-banner h3{
+  font-family:'Fraunces',serif;
+  font-size:1.15rem;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.sensitive-banner p{
+  font-size:0.82rem;
+  color:rgba(255,255,255,0.8);
+  line-height:1.65;
+  margin-bottom:8px;
+}
+
+.sensitive-banner .s-highlight{
+  color:#fff;
+  font-weight:700;
+}
+
+/* ── EXPANDABLE ACCORDION ── */
+.accordion{
+  background:var(--card);
+  border-radius:var(--r);
+  box-shadow:var(--shadow);
+  margin-bottom:12px;
+  overflow:hidden;
+}
+
+.acc-trigger{
+  width:100%;
+  padding:16px 20px;
+  background:none;
+  border:none;
+  font-family:inherit;
+  font-size:0.92rem;
+  font-weight:700;
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+  text-align:left;
+}
+
+.acc-arrow{
+  font-size:0.8rem;
+  transition:transform 0.3s;
+  color:var(--text-light);
+}
+
+.acc-trigger.open .acc-arrow{transform:rotate(180deg);}
+
+.acc-panel{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.4s ease;
+}
+
+.acc-inner{padding:0 20px 20px;}
+.acc-inner p{font-size:0.84rem;color:var(--text-mid);line-height:1.65;margin-bottom:10px;}
+
+/* ── FOOTER ── */
+.footer{
+  text-align:center;
+  padding:32px 16px 40px;
+}
+
+.footer-line{
+  width:60px;height:3px;
+  background:linear-gradient(90deg,var(--seeker),var(--aware));
+  border-radius:100px;
+  margin:0 auto 16px;
+}
+
+.footer p{font-size:0.72rem;color:var(--text-light);line-height:1.6;}
+.footer strong{color:var(--text);}
+
+/* ── ILLUSTRATION PLATES ── */
+.illust-plate{
+  width:100%;
+  border-radius:var(--r);
+  overflow:hidden;
+  margin-bottom:20px;
+  position:relative;
+}
+
+.illust-plate svg{display:block;width:100%;}
+
+@media print{
+  .hero{background:#2E3A50 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .acc-panel{max-height:none !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<div class="hero">
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-badge">&#9670; Emotional Intelligence &middot; OB Module</div>
+  <h1>The Four Faces of Self-Awareness</h1>
+  <p>95% of people think they are self-aware. Research says only 10-15% actually are. Which type are you, and what does that mean for your life?</p>
+  <div class="hero-stat-row">
+    <div class="hero-stat"><div class="n">4</div><div class="l">Archetypes</div></div>
+    <div class="hero-stat"><div class="n">2</div><div class="l">Dimensions</div></div>
+    <div class="hero-stat"><div class="n">&infin;</div><div class="l">Growth</div></div>
+  </div>
+  <div class="hero-credit">Based on Dr. Tasha Eurich's research with ~5,000 participants &middot; Daniel Goleman's EI Model</div>
+</div>
+
+<div class="wrap">
+
+<!-- ══════════ IMPORTANT FRAMING ══════════ -->
+<div class="sec">
+  <div class="sensitive-banner">
+    <h3>💡 Read This First</h3>
+    <p>These are <span class="s-highlight">not personality types</span>. They are <span class="s-highlight">positions on a map</span>. You move. Everyone moves.</p>
+    <p>The same person can be an Introspector at work and a Pleaser at home. You can be Aware in friendships and a Seeker in career decisions.</p>
+    <p>Your archetype tells you <span class="s-highlight">where you are standing right now</span>, not who you are. There is no "bad" type. There are only different starting points.</p>
+  </div>
+</div>
+
+<!-- ══════════ THE MATRIX ══════════ -->
+<div class="sec">
+  <div class="sec-label">&#9650; The Framework</div>
+  <h2>Two Dimensions, Four Types</h2>
+  <p>Dr. Tasha Eurich discovered that self-awareness has two independent dimensions. You can be high on one and low on the other.</p>
+</div>
+
+<!-- Illustration: Two Dimensions -->
+<div class="illust-plate">
+<svg viewBox="0 0 560 160" xmlns="http://www.w3.org/2000/svg">
+  <rect width="560" height="160" rx="20" fill="#FFFFFF"/>
+  <rect x="20" y="20" width="250" height="120" rx="14" fill="#E3ECF7"/>
+  <text x="145" y="52" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#2E4A72" letter-spacing="0.08em">INTERNAL SELF-AWARENESS</text>
+  <text x="145" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#5B7DB1">"How clearly do I see myself?"</text>
+  <text x="50" y="96" font-family="DM Sans,sans-serif" font-size="9" fill="#484860">&#8226; My values &amp; beliefs</text>
+  <text x="50" y="112" font-family="DM Sans,sans-serif" font-size="9" fill="#484860">&#8226; My emotions &amp; triggers</text>
+  <text x="50" y="128" font-family="DM Sans,sans-serif" font-size="9" fill="#484860">&#8226; My strengths &amp; weaknesses</text>
+
+  <rect x="290" y="20" width="250" height="120" rx="14" fill="#FDF0E8"/>
+  <text x="415" y="52" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#7A4A2E" letter-spacing="0.08em">EXTERNAL SELF-AWARENESS</text>
+  <text x="415" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#C17D59">"How do others experience me?"</text>
+  <text x="320" y="96" font-family="DM Sans,sans-serif" font-size="9" fill="#484860">&#8226; How my words land</text>
+  <text x="320" y="112" font-family="DM Sans,sans-serif" font-size="9" fill="#484860">&#8226; How my actions affect others</text>
+  <text x="320" y="128" font-family="DM Sans,sans-serif" font-size="9" fill="#484860">&#8226; How I am really perceived</text>
+</svg>
+</div>
+
+<div class="callout">
+  <div class="callout-icon">🔑</div>
+  <p><span class="highlight">The key insight:</span> These two dimensions are independent. Knowing yourself deeply does NOT automatically mean you know how others see you. And reading every room perfectly does NOT mean you know what you actually want.</p>
+</div>
+
+<!-- The 2x2 Matrix -->
+<div class="matrix-visual">
+  <div class="matrix-title">The Self-Awareness Matrix</div>
+  <div class="matrix-axis" style="display:flex;margin-bottom:4px;">
+    <span>&larr; Low External</span>
+    <span>High External &rarr;</span>
+  </div>
+  <div class="matrix-grid">
+    <div class="matrix-cell" style="background:var(--introspector-light);">
+      <div class="m-emoji">🔍</div>
+      <div class="m-name" style="color:var(--introspector-dark)">Introspector</div>
+      <div class="m-sub" style="color:var(--introspector)">High Internal<br>Low External</div>
+    </div>
+    <div class="matrix-cell" style="background:var(--aware-light);">
+      <div class="m-emoji">🌟</div>
+      <div class="m-name" style="color:var(--aware-dark)">Aware</div>
+      <div class="m-sub" style="color:var(--aware)">High Internal<br>High External</div>
+    </div>
+    <div class="matrix-cell" style="background:var(--seeker-light);">
+      <div class="m-emoji">🌱</div>
+      <div class="m-name" style="color:var(--seeker-dark)">Seeker</div>
+      <div class="m-sub" style="color:var(--seeker)">Low Internal<br>Low External</div>
+    </div>
+    <div class="matrix-cell" style="background:var(--pleaser-light);">
+      <div class="m-emoji">🎭</div>
+      <div class="m-name" style="color:var(--pleaser-dark)">Pleaser</div>
+      <div class="m-sub" style="color:var(--pleaser)">Low Internal<br>High External</div>
+    </div>
+  </div>
+  <div class="matrix-axis" style="display:flex;margin-top:4px;">
+    <span>&uarr; High Internal</span>
+    <span>Low Internal &darr;</span>
+  </div>
+</div>
+
+<!-- ══════════ ARCHETYPE 1: SEEKER ══════════ -->
+<div class="sec"><h2>Meet the Four Types</h2></div>
+
+<div class="arch-card">
+  <div class="arch-header">
+    <div class="arch-avatar" style="background:var(--seeker-light);">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="18" r="9" fill="var(--seeker)"/>
+        <path d="M12 40c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="var(--seeker)" opacity="0.4"/>
+        <circle cx="21" cy="16" r="1.5" fill="#fff"/>
+        <circle cx="27" cy="16" r="1.5" fill="#fff"/>
+        <path d="M20 21c0 0 2 2 4 2s4-2 4-2" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <text x="24" y="46" text-anchor="middle" font-size="6" fill="var(--seeker-dark)" font-family="sans-serif">?  ?  ?</text>
+      </svg>
+    </div>
+    <div class="arch-meta">
+      <h3 style="color:var(--seeker-dark)">The Seeker 🌱</h3>
+      <span class="arch-tag" style="background:var(--seeker-light);color:var(--seeker-dark);">Low Internal &middot; Low External</span>
+    </div>
+  </div>
+  <div class="arch-body">
+    <div class="arch-desc">The Seeker hasn't yet built a clear picture of their own values, emotions, and patterns, and doesn't fully know how others experience them. This is the most common starting point. Every deeply self-aware person began here.</div>
+
+    <div class="arch-who" style="border-left:3px solid var(--seeker);">
+      <div class="arch-who-title" style="color:var(--seeker-dark);">🎓 In College, This Often Looks Like</div>
+      <p>The student who chose their course because their parents suggested it. Who says "I'm fine" when asked how they feel, because they haven't really checked. Who goes along with friend groups without questioning. Who feels busy but can't explain what they're working toward.</p>
+    </div>
+
+    <div class="myth-box">
+      <div class="myth-icon">❌</div>
+      <div class="myth-text"><strong>Common Misread:</strong> "This person doesn't care about self-improvement." Wrong. They simply haven't been given the tools or the space to start. Nobody taught them how.</div>
+    </div>
+    <div class="truth-box">
+      <div class="myth-icon">✅</div>
+      <div class="truth-text"><strong>The Real Story:</strong> Seekers have the most room to grow. Every small step shows visible results faster than any other type. That first moment of "Oh, THAT'S what I was feeling" is transformative.</div>
+    </div>
+
+    <div class="arch-section-title" style="color:var(--seeker-dark);">🛤️ Growth Path</div>
+    <div class="growth-steps">
+      <div class="growth-step">
+        <div class="step-num" style="background:var(--seeker);">1</div>
+        <div class="step-text"><strong>Start noticing.</strong> Set 3 phone alarms daily: "What am I feeling right now?" One-word answers are fine. Do this for 2 weeks.</div>
+      </div>
+      <div class="growth-step">
+        <div class="step-num" style="background:var(--seeker);">2</div>
+        <div class="step-text"><strong>Name it to tame it.</strong> Build an emotion vocabulary beyond happy/sad/angry. Try: overwhelmed, relieved, conflicted, anxious, grateful, restless.</div>
+      </div>
+      <div class="growth-step">
+        <div class="step-num" style="background:var(--seeker);">3</div>
+        <div class="step-text"><strong>One honest conversation a week.</strong> Ask someone you trust: "What's one thing you've noticed about me that I might not notice about myself?"</div>
+      </div>
+    </div>
+
+    <div class="tip-box" style="background:var(--seeker-light);border-left:3px solid var(--seeker);">
+      <p>💬 <strong>How to hear it without feeling judged:</strong> "You are at the starting line. That's not a weakness. It means every step you take from here will make a visible difference. Most people never even get to this starting line because they never stop to ask."</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ARCHETYPE 2: INTROSPECTOR ══════════ -->
+<div class="arch-card">
+  <div class="arch-header">
+    <div class="arch-avatar" style="background:var(--introspector-light);">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="18" r="9" fill="var(--introspector)"/>
+        <path d="M12 40c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="var(--introspector)" opacity="0.4"/>
+        <circle cx="21" cy="16" r="1.5" fill="#fff"/>
+        <circle cx="27" cy="16" r="1.5" fill="#fff"/>
+        <path d="M20 20.5 h8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="38" cy="10" r="6" fill="var(--introspector-light)" stroke="var(--introspector)" stroke-width="1.5"/>
+        <line x1="38" y1="7" x2="38" y2="13" stroke="var(--introspector)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="35" y1="10" x2="41" y2="10" stroke="var(--introspector)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="arch-meta">
+      <h3 style="color:var(--introspector-dark)">The Introspector 🔍</h3>
+      <span class="arch-tag" style="background:var(--introspector-light);color:var(--introspector-dark);">High Internal &middot; Low External</span>
+    </div>
+  </div>
+  <div class="arch-body">
+    <div class="arch-desc">The Introspector knows themselves well internally: their values, feelings, convictions, and patterns. But they have a blind spot about how they come across to others. The gap between their intention and their impact is where their growth lives.</div>
+
+    <div class="arch-who" style="border-left:3px solid var(--introspector);">
+      <div class="arch-who-title" style="color:var(--introspector-dark);">🎓 In College, This Often Looks Like</div>
+      <p>The student who speaks up confidently but doesn't notice their tone was dismissive. Who writes brilliant reflections but struggles in group work. Who says "I'm just being honest" without realising that honesty without impact awareness is just bluntness. They have integrity but sometimes lack influence.</p>
+    </div>
+
+    <div class="myth-box">
+      <div class="myth-icon">❌</div>
+      <div class="myth-text"><strong>Common Misread:</strong> "This person is arrogant or doesn't care about others." Wrong. They genuinely believe they're being authentic. They just can't see the wake they leave behind.</div>
+    </div>
+    <div class="truth-box">
+      <div class="myth-icon">✅</div>
+      <div class="truth-text"><strong>The Real Story:</strong> The inner work is already done. Once an Introspector learns to see their impact, they become powerfully effective because they combine self-knowledge with social awareness.</div>
+    </div>
+
+    <div class="arch-section-title" style="color:var(--introspector-dark);">🛤️ Growth Path</div>
+    <div class="growth-steps">
+      <div class="growth-step">
+        <div class="step-num" style="background:var(--introspector);">1</div>
+        <div class="step-text"><strong>Find your "loving critics."</strong> People who care about you AND will be honest. Ask them: "What's one thing I do that helps, and one thing that doesn't?"</div>
+      </div>
+      <div class="growth-step">
+        <div class="step-num" style="background:var(--introspector);">2</div>
+        <div class="step-text"><strong>Ask "How did that land?"</strong> After important conversations, check in. Not because you were wrong, but because your radar for others' reactions needs calibration.</div>
+      </div>
+      <div class="growth-step">
+        <div class="step-num" style="background:var(--introspector);">3</div>
+        <div class="step-text"><strong>Watch body language.</strong> In your next 5 conversations, focus less on what you want to say and more on what the other person's face and posture are telling you.</div>
+      </div>
+    </div>
+
+    <div class="tip-box" style="background:var(--introspector-light);border-left:3px solid var(--introspector);">
+      <p>💬 <strong>How to hear it without feeling judged:</strong> "You've done the hard inner work. You know who you are. That's genuinely rare. Your blind spot isn't about knowing yourself. It's about knowing the effect you have. Adding that layer makes you unstoppable."</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ARCHETYPE 3: PLEASER ══════════ -->
+<div class="arch-card">
+  <div class="arch-header">
+    <div class="arch-avatar" style="background:var(--pleaser-light);">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="18" r="9" fill="var(--pleaser)"/>
+        <path d="M12 40c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="var(--pleaser)" opacity="0.4"/>
+        <circle cx="21" cy="16" r="1.5" fill="#fff"/>
+        <circle cx="27" cy="16" r="1.5" fill="#fff"/>
+        <path d="M20 21c0 0 2 2 4 2s4-2 4-2" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <circle cx="10" cy="14" r="4" fill="var(--pleaser)" opacity="0.2"/>
+        <circle cx="38" cy="14" r="4" fill="var(--pleaser)" opacity="0.2"/>
+        <circle cx="10" cy="28" r="3" fill="var(--pleaser)" opacity="0.15"/>
+        <circle cx="38" cy="28" r="3" fill="var(--pleaser)" opacity="0.15"/>
+        <path d="M14 14 L18 16 M34 14 L30 16 M13 28 L17 25 M35 28 L31 25" stroke="var(--pleaser)" stroke-width="0.8" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="arch-meta">
+      <h3 style="color:var(--pleaser-dark)">The Pleaser 🎭</h3>
+      <span class="arch-tag" style="background:var(--pleaser-light);color:var(--pleaser-dark);">Low Internal &middot; High External</span>
+    </div>
+  </div>
+  <div class="arch-body">
+    <div class="arch-desc">The Pleaser reads every room perfectly. They know what the professor wants, what friends expect, what parents approve of. But inside, they may feel hollow. They've spent so much energy tracking others' expectations that they've lost touch with what they actually want.</div>
+
+    <div class="arch-who" style="border-left:3px solid var(--pleaser);">
+      <div class="arch-who-title" style="color:var(--pleaser-dark);">🎓 In College, This Often Looks Like</div>
+      <p>The "good student" who gets along with everyone. Who always knows the right thing to say. Who gets praised for being "adjusting" and "no trouble." But when asked "What do YOU want?", they hesitate, because the question itself feels unfamiliar. They've built their identity around meeting other people's expectations.</p>
+    </div>
+
+    <div class="myth-box">
+      <div class="myth-icon">❌</div>
+      <div class="myth-text"><strong>Common Misread:</strong> "This person is fake or people-pleasing for selfish reasons." Wrong. Their attunement to others is real and valuable. They're not being strategic. They're doing the only thing they've been rewarded for.</div>
+    </div>
+    <div class="truth-box">
+      <div class="myth-icon">✅</div>
+      <div class="truth-text"><strong>The Real Story:</strong> Their social awareness is a genuine superpower. The question isn't whether it's valuable. It is. The question is: does the Pleaser know what THEY want when nobody is watching? Adding internal clarity transforms their talent from survival mode into leadership.</div>
+    </div>
+
+    <div class="arch-section-title" style="color:var(--pleaser-dark);">🛤️ Growth Path</div>
+    <div class="growth-steps">
+      <div class="growth-step">
+        <div class="step-num" style="background:var(--pleaser);">1</div>
+        <div class="step-text"><strong>Ask "What" not "Why."</strong> Not "Why do I always agree?" (triggers shame). Instead: "What do I actually think about this, separate from what others think?"</div>
+      </div>
+      <div class="growth-step">
+        <div class="step-num" style="background:var(--pleaser);">2</div>
+        <div class="step-text"><strong>The Solo Decision Test.</strong> This week, make one small decision (what to eat, what to watch, where to go) entirely based on what YOU want, without consulting anyone.</div>
+      </div>
+      <div class="growth-step">
+        <div class="step-num" style="background:var(--pleaser);">3</div>
+        <div class="step-text"><strong>Values Discovery.</strong> Write down 10 things you value. Circle 3. For each, write a moment when you honoured that value. This connects you to an identity that is yours, not borrowed.</div>
+      </div>
+    </div>
+
+    <div class="tip-box" style="background:var(--pleaser-light);border-left:3px solid var(--pleaser);">
+      <p>💬 <strong>How to hear it without feeling judged:</strong> "Your social awareness is a genuine strength. You understand people. That's rare and valuable. The invitation is to add another layer: knowing what YOU want when nobody else's expectations are in the room. That's not selfish. It's necessary."</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ARCHETYPE 4: AWARE ══════════ -->
+<div class="arch-card">
+  <div class="arch-header">
+    <div class="arch-avatar" style="background:var(--aware-light);">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="18" r="9" fill="var(--aware)"/>
+        <path d="M12 40c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="var(--aware)" opacity="0.4"/>
+        <circle cx="21" cy="16" r="1.5" fill="#fff"/>
+        <circle cx="27" cy="16" r="1.5" fill="#fff"/>
+        <path d="M20 21c0 0 2 2 4 2s4-2 4-2" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <path d="M24 4 L26 8 L30 8 L27 11 L28 15 L24 12 L20 15 L21 11 L18 8 L22 8 Z" fill="#FFD700" opacity="0.7"/>
+      </svg>
+    </div>
+    <div class="arch-meta">
+      <h3 style="color:var(--aware-dark)">The Aware 🌟</h3>
+      <span class="arch-tag" style="background:var(--aware-light);color:var(--aware-dark);">High Internal &middot; High External</span>
+    </div>
+  </div>
+  <div class="arch-body">
+    <div class="arch-desc">The Aware student knows themselves clearly AND understands how others experience them. Eurich's research suggests only 10-15% of people are genuinely in this quadrant. They combine self-knowledge with social perception, the foundation of emotional intelligence.</div>
+
+    <div class="arch-who" style="border-left:3px solid var(--aware);">
+      <div class="arch-who-title" style="color:var(--aware-dark);">🎓 In College, This Often Looks Like</div>
+      <p>The student who seems emotionally steady. Who handles conflict without escalating. Who can take feedback without crumbling and give feedback without hurting. Who knows what they want AND how to work with others toward it. They often become natural leaders, not because they seek authority, but because people trust them.</p>
+    </div>
+
+    <div class="myth-box">
+      <div class="myth-icon">❌</div>
+      <div class="myth-text"><strong>Common Misread:</strong> "This person has it all figured out and doesn't need to grow." Wrong. Self-awareness is like fitness. You don't stay fit by remembering you used to exercise. The moment you stop practising, you start sliding.</div>
+    </div>
+    <div class="truth-box">
+      <div class="myth-icon">✅</div>
+      <div class="truth-text"><strong>The Real Story:</strong> Aware students need purpose and challenge, not congratulations. Their role is to maintain, deepen, and help others. Mentoring someone else is the best way to sharpen their own awareness.</div>
+    </div>
+
+    <div class="arch-section-title" style="color:var(--aware-dark);">🛤️ Growth Path</div>
+    <div class="growth-steps">
+      <div class="growth-step">
+        <div class="step-num" style="background:var(--aware);">1</div>
+        <div class="step-text"><strong>Maintain the practice.</strong> Keep a weekly reflection habit. Self-awareness erodes silently without maintenance, especially as responsibility and power increase.</div>
+      </div>
+      <div class="growth-step">
+        <div class="step-num" style="background:var(--aware);">2</div>
+        <div class="step-text"><strong>Mentor a Seeker.</strong> Pair up with someone earlier in their journey. Teaching self-awareness to others is the fastest way to deepen your own.</div>
+      </div>
+      <div class="growth-step">
+        <div class="step-num" style="background:var(--aware);">3</div>
+        <div class="step-text"><strong>Hunt for blind spots.</strong> Even Aware people have them. Ask yourself: "In which area of my life am I least self-aware?" Relationships? Money? Health? Go there.</div>
+      </div>
+    </div>
+
+    <div class="tip-box" style="background:var(--aware-light);border-left:3px solid var(--aware);">
+      <p>💬 <strong>How to hear it:</strong> "You're in a strong position. But this isn't a trophy. The most self-aware people Eurich studied were the ones who said 'I still have so much to learn.' That humility IS the awareness."</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ WHY EVERYONE NEEDS TO GROW ══════════ -->
+<div class="sec">
+  <div class="sec-label">⚡ The Stakes</div>
+  <h2>What Happens If You Don't Grow?</h2>
+  <p>Self-awareness is not optional. Every type faces real consequences for staying where they are.</p>
+</div>
+
+<div class="why-grid">
+  <div class="why-card">
+    <div class="why-icon" style="background:var(--seeker-light);">🌱</div>
+    <div class="why-content">
+      <h4 style="color:var(--seeker-dark)">The Seeker Who Stays</h4>
+      <p>Keeps making decisions by default instead of by design. Picks careers because someone said to. When things go wrong, can't name why. Most vulnerable to the "I feel worthless" spiral, because you can't fix what you can't see.</p>
+    </div>
+  </div>
+  <div class="why-card">
+    <div class="why-icon" style="background:var(--introspector-light);">🔍</div>
+    <div class="why-content">
+      <h4 style="color:var(--introspector-dark)">The Introspector Who Stays</h4>
+      <p>Keeps damaging relationships without understanding why. Becomes the manager everyone dreads. Has integrity but no influence. Says "I told them the truth" while people stop telling them anything.</p>
+    </div>
+  </div>
+  <div class="why-card">
+    <div class="why-icon" style="background:var(--pleaser-light);">🎭</div>
+    <div class="why-content">
+      <h4 style="color:var(--pleaser-dark)">The Pleaser Who Stays</h4>
+      <p>Burns out. Running on other people's fuel. Graduates with great grades and an empty feeling. In serious cases, loses the ability to make any decision without external validation. Dependency, not connection.</p>
+    </div>
+  </div>
+  <div class="why-card">
+    <div class="why-icon" style="background:var(--aware-light);">🌟</div>
+    <div class="why-content">
+      <h4 style="color:var(--aware-dark)">The Aware Who Stops</h4>
+      <p>Slowly drifts. Power and experience actually erode self-awareness because people stop giving you honest feedback. The senior leader who "knows best" was once the most self-aware person in the room.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FAQ / ACCORDION ══════════ -->
+<div class="sec">
+  <div class="sec-label">❓ Common Questions</div>
+  <h2>Things You Might Be Wondering</h2>
+</div>
+
+<div class="accordion">
+  <button class="acc-trigger" onclick="toggleAcc(this)">Can I be different types in different areas of life? <span class="acc-arrow">▼</span></button>
+  <div class="acc-panel"><div class="acc-inner"><p>Absolutely. You might be an Introspector at work (know yourself well but miss how your emails land) and a Pleaser at home (tune into family expectations but lose track of what you need). The archetype is situation-dependent, not fixed.</p></div></div>
+</div>
+
+<div class="accordion">
+  <button class="acc-trigger" onclick="toggleAcc(this)">Can my type change over time? <span class="acc-arrow">▼</span></button>
+  <div class="acc-panel"><div class="acc-inner"><p>Yes. That is the entire point. These are positions on a map, not personality traits. With deliberate practice, you can move from any quadrant toward Aware. Eurich's research shows this is a skill, not a gift.</p></div></div>
+</div>
+
+<div class="accordion">
+  <button class="acc-trigger" onclick="toggleAcc(this)">Is "Aware" the goal for everyone? <span class="acc-arrow">▼</span></button>
+  <div class="acc-panel"><div class="acc-inner"><p>Yes, in the sense that developing both internal and external self-awareness serves everyone. No, in the sense that "Aware" is not a finish line. It is a practice, not a destination. Even people in the Aware quadrant have blind spots and need to keep working.</p></div></div>
+</div>
+
+<div class="accordion">
+  <button class="acc-trigger" onclick="toggleAcc(this)">What if my score makes me feel bad about myself? <span class="acc-arrow">▼</span></button>
+  <div class="acc-panel"><div class="acc-inner"><p>That reaction itself is self-awareness in action. You noticed a feeling and named it. The survey is a mirror, not a verdict. A low score today means high growth potential tomorrow. The only people who never grow are those who never look.</p></div></div>
+</div>
+
+<div class="accordion">
+  <button class="acc-trigger" onclick="toggleAcc(this)">Is self-awareness the same as being emotional? <span class="acc-arrow">▼</span></button>
+  <div class="acc-panel"><div class="acc-inner"><p>No. Self-awareness is not about having more emotions or fewer emotions. It is about seeing your emotions clearly as they happen, understanding what triggers them, and choosing how to respond instead of just reacting. It actually makes you calmer, not more emotional.</p></div></div>
+</div>
+
+<div class="accordion">
+  <button class="acc-trigger" onclick="toggleAcc(this)">Why "What" questions instead of "Why" questions? <span class="acc-arrow">▼</span></button>
+  <div class="acc-panel"><div class="acc-inner"><p>Tasha Eurich's research found that asking "Why did I fail?" triggers unproductive rumination and often reinforces our existing biases. Asking "What factors contributed to this result?" keeps you grounded in observable facts and opens up actionable answers. It is a small word change that makes a huge difference.</p></div></div>
+</div>
+
+<!-- ══════════ CLOSING ══════════ -->
+<div class="sec">
+  <div class="callout" style="border-left-color:var(--seeker);background:linear-gradient(135deg,#F7F5F0,#E8F5ED);">
+    <div class="callout-icon">🪴</div>
+    <p style="font-size:0.95rem;color:var(--text);font-weight:600;line-height:1.55;">Self-awareness is not a destination. It is a daily practice. The students who keep practising after this module will be the ones who lead, who build meaningful relationships, who make decisions they're proud of, and who can honestly say: "I know who I am."</p>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-line"></div>
+  <p><strong>Learn with Dinesh Sir</strong></p>
+  <p>Self-Awareness Index &middot; Organisational Behaviour</p>
+  <p style="margin-top:8px;">"Be inspired and keep inspiring."</p>
+  <p style="margin-top:12px;font-size:0.65rem;">Research: Goleman (1995, 1998) &middot; Eurich (2017, 2018) &middot; CASEL Framework</p>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+function toggleAcc(btn){
+  const panel = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.acc-trigger').forEach(b => {
+    b.classList.remove('open');
+    b.nextElementSibling.style.maxHeight = '0';
+  });
+  // Open clicked (if was closed)
+  if(!isOpen){
+    btn.classList.add('open');
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+  }
+}
+</script>
+</body>
+</html>

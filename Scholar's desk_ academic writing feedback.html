@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Scholar's desk: academic writing feedback</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7F9;--sheet:#FFFFFF;--ink:#16213A;--ink-2:#4B5568;--ink-3:#7A8396;--rule:#DDE1E8;--rule-2:#C5CBD6;
+  --pen:#B42318;--pen-bg:#FDECEA;--blue:#1F4FB8;
+  --tone-bg:#FCEFC7;--tone-fg:#734600;--over-bg:#FBE1DE;--over-fg:#8F1D14;
+  --apa-bg:#DCE8FB;--apa-fg:#173E8C;--flow-bg:#ECE5FB;--flow-fg:#4A2C8F;--cite-bg:#D6F1EA;--cite-fg:#0B5A48;--voice-bg:#FBE4F0;--voice-fg:#86204F;
+  --good:#1D6B3A;--warn:#8A5A00;
+  --serif:"Literata",Georgia,"Times New Roman",serif;--sans:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#10141C;--sheet:#171C27;--ink:#E7EAF1;--ink-2:#B3BACA;--ink-3:#8790A3;--rule:#2A3242;--rule-2:#3A4457;
+  --pen:#F28B7E;--pen-bg:#3A1C1A;--blue:#8DB0F5;
+  --tone-bg:#4A3610;--tone-fg:#F6D58A;--over-bg:#4A1E1A;--over-fg:#F7B4AB;
+  --apa-bg:#1C2E52;--apa-fg:#B2CBF7;--flow-bg:#2E2352;--flow-fg:#CDBDF6;--cite-bg:#123F36;--cite-fg:#9EE3D0;--voice-bg:#4A1A33;--voice-fg:#F5B8D4;
+  --good:#8FD6A8;--warn:#F2CC7A;}}
+:root[data-theme="dark"]{
+  --paper:#10141C;--sheet:#171C27;--ink:#E7EAF1;--ink-2:#B3BACA;--ink-3:#8790A3;--rule:#2A3242;--rule-2:#3A4457;
+  --pen:#F28B7E;--pen-bg:#3A1C1A;--blue:#8DB0F5;
+  --tone-bg:#4A3610;--tone-fg:#F6D58A;--over-bg:#4A1E1A;--over-fg:#F7B4AB;
+  --apa-bg:#1C2E52;--apa-fg:#B2CBF7;--flow-bg:#2E2352;--flow-fg:#CDBDF6;--cite-bg:#123F36;--cite-fg:#9EE3D0;--voice-bg:#4A1A33;--voice-fg:#F5B8D4;
+  --good:#8FD6A8;--warn:#F2CC7A;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55}
+a{color:var(--blue)}
+button,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.wrap{max-width:1280px;margin:0 auto;padding:28px 20px 60px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--rule)}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(26px,3.4vw,34px);line-height:1.15;margin:0;letter-spacing:-0.01em}
+h1 .mark{text-decoration:underline;text-decoration-color:var(--pen);text-decoration-thickness:2px;text-underline-offset:6px}
+.lede{margin:6px 0 0;color:var(--ink-2);max-width:62ch}
+.promise{font-size:13px;color:var(--ink-2);border:1px solid var(--rule-2);border-radius:6px;padding:8px 12px;max-width:340px;background:var(--sheet)}
+.grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px;margin-top:22px}
+@media (max-width:980px){.grid{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--sheet);border:1px solid var(--rule);border-radius:10px}
+.pad{padding:18px 20px}
+label.small{display:block;font-size:13px;font-weight:500;color:var(--ink-2);margin-bottom:6px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.selects{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+select{background:var(--sheet);border:1px solid var(--rule-2);border-radius:6px;padding:8px 10px;min-height:40px;width:100%}
+textarea{width:100%;background:var(--sheet);border:1px solid var(--rule-2);border-radius:6px;padding:14px 16px;resize:vertical}
+#draft{font-family:var(--serif);font-size:16.5px;line-height:1.75;min-height:280px}
+#refs{font-family:var(--sans);font-size:13.5px;min-height:110px}
+.btn{border:1px solid var(--rule-2);background:var(--sheet);border-radius:6px;padding:9px 16px;cursor:pointer;min-height:40px}
+.btn:hover{border-color:var(--ink-3)}
+.btn.primary{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.btn.primary:hover{opacity:.92}
+.meta{font-size:13px;color:var(--ink-3)}
+.err{font-size:13px;color:var(--pen);min-height:18px;margin-top:6px}
+details.refs{margin-top:16px;border-top:1px solid var(--rule);padding-top:14px}
+details.refs summary{cursor:pointer;font-weight:500;font-size:14px}
+#annot{font-family:var(--serif);font-size:16.5px;line-height:1.95;margin-top:18px;padding:18px 20px;border-left:3px solid var(--pen);background:var(--sheet);border-top:1px solid var(--rule);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);border-radius:0 8px 8px 0}
+#annot p{margin:0 0 1.1em}
+#annot .pnum{font-family:var(--sans);font-size:11.5px;color:var(--pen);font-weight:600;margin-right:6px;vertical-align:1px}
+mark{border-radius:3px;padding:0 2px;cursor:pointer;color:inherit}
+mark.tone{background:var(--tone-bg);color:var(--tone-fg)}mark.over{background:var(--over-bg);color:var(--over-fg)}
+mark.apa{background:var(--apa-bg);color:var(--apa-fg)}mark.flow{background:var(--flow-bg);color:var(--flow-fg)}
+mark.cite{background:var(--cite-bg);color:var(--cite-fg)}mark.voice{background:var(--voice-bg);color:var(--voice-fg)}
+mark.active{outline:2px solid var(--pen);outline-offset:1px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{font-size:12px;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.c-tone{background:var(--tone-bg);color:var(--tone-fg)}.c-over{background:var(--over-bg);color:var(--over-fg)}
+.c-apa{background:var(--apa-bg);color:var(--apa-fg)}.c-flow{background:var(--flow-bg);color:var(--flow-fg)}.c-cite{background:var(--cite-bg);color:var(--cite-fg)}.c-voice{background:var(--voice-bg);color:var(--voice-fg)}
+.c-pen{background:var(--pen-bg);color:var(--pen)}
+.tabs{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--rule);padding:0 10px}
+.tab{background:none;border:0;border-bottom:2px solid transparent;padding:14px 11px 11px;cursor:pointer;color:var(--ink-2);white-space:nowrap;font-size:14px}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--pen);font-weight:500}
+.tab .n{font-size:11.5px;color:var(--ink-3);margin-left:4px}
+.tabpane{padding:18px 20px}
+.tabpane[hidden]{display:none}
+.dims{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.dim{border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.dim .k{font-size:12.5px;color:var(--ink-2)}
+.dim .v{font-family:var(--serif);font-size:18px;font-weight:500;margin-top:2px}
+.dim .n{font-size:12px;color:var(--ink-3)}
+.v.good{color:var(--good)}.v.warn{color:var(--warn)}.v.bad{color:var(--pen)}
+.stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px 18px;margin-top:14px;font-size:13px;color:var(--ink-2)}
+.stat b{color:var(--ink);font-weight:600}
+ul.issues{list-style:none;margin:0;padding:0}
+ul.issues li{padding:12px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start}
+ul.issues li:last-child{border-bottom:0}
+.q{font-family:var(--serif);font-weight:500}
+.why{color:var(--ink-2);font-size:14px}
+.where{font-size:12px;color:var(--ink-3)}
+.empty{color:var(--ink-3);font-size:14px;padding:6px 0}
+h2{font-family:var(--serif);font-weight:500;font-size:19px;margin:0 0 10px}
+h3{font-size:14px;font-weight:600;margin:18px 0 8px}
+.moves{display:grid;gap:8px}
+.move{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;padding:10px 12px;border:1px solid var(--rule);border-radius:8px}
+.dot{width:12px;height:12px;border-radius:50%;margin-top:5px}
+.dot.ok{background:var(--good)}.dot.weak{background:var(--warn)}.dot.miss{background:var(--pen)}
+.pb-group{margin-bottom:16px}
+.pb-item{display:block;width:100%;text-align:left;background:none;border:1px solid var(--rule);border-radius:6px;padding:8px 12px;margin:6px 0;cursor:pointer;font-family:var(--serif);font-size:14.5px}
+.pb-item:hover{border-color:var(--ink-3)}
+.res{display:grid;gap:10px}
+.res a{display:block;border:1px solid var(--rule);border-radius:8px;padding:12px 14px;text-decoration:none;color:var(--ink)}
+.res a:hover{border-color:var(--ink-3)}
+.res .t{font-family:var(--serif);font-weight:500}
+.res .d{font-size:13.5px;color:var(--ink-2)}
+.para-card{border:1px solid var(--rule);border-radius:8px;padding:12px 14px;margin-bottom:10px}
+.para-card .hd{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:6px}
+.qtn{font-family:var(--serif);font-style:italic;color:var(--ink-2);margin-top:6px}
+.small-btn{min-height:0;padding:3px 10px;margin-top:6px;font-size:12.5px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--sheet);padding:8px 14px;border-radius:6px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <h1>Scholar's <span class="mark">desk</span></h1>
+    <p class="lede">Feedback on tone, voice, APA 7, structure and flow for journal articles, book chapters, conference papers, theses and synopses. You write; the desk marks it up like a careful reviewer.</p>
+  </div>
+  <p class="promise">This desk never rewrites your sentences. It shows what to revise and asks the questions that lead to better writing, so the voice stays your own.</p>
+</header>
+
+<div class="grid">
+  <section class="panel pad" aria-label="Your draft">
+    <div class="selects">
+      <div>
+        <label class="small" for="doctype">What you're writing</label>
+        <select id="doctype">
+          <option value="article">Journal article (empirical)</option>
+          <option value="review">Review article</option>
+          <option value="chapter">Book chapter</option>
+          <option value="conference">Conference paper</option>
+          <option value="thesis">Thesis or dissertation</option>
+          <option value="synopsis">PhD synopsis or proposal</option>
+        </select>
+      </div>
+      <div>
+        <label class="small" for="section">Section</label>
+        <select id="section">
+          <option value="abstract">Abstract</option>
+          <option value="intro">Introduction</option>
+          <option value="lit">Literature review or theoretical background</option>
+          <option value="hyp">Hypotheses development</option>
+          <option value="gap">Research gap and objectives</option>
+          <option value="method">Methodology</option>
+          <option value="results">Results</option>
+          <option value="discussion">Discussion</option>
+          <option value="implications">Implications</option>
+          <option value="limits">Limitations and future research</option>
+          <option value="conclusion">Conclusion</option>
+          <option value="general">Other or general</option>
+        </select>
+      </div>
+    </div>
+    <div class="row" style="justify-content:space-between;margin-top:14px">
+      <label class="small" for="draft" style="margin:0">Your draft (separate paragraphs with a blank line)</label>
+      <span class="meta" id="saved"></span>
+    </div>
+    <textarea id="draft" style="margin-top:6px" placeholder="Paste or write a section here."></textarea>
+    <details class="refs">
+      <summary>Reference list (optional, for APA 7 checks)</summary>
+      <p class="meta" style="margin:6px 0 8px">One entry per line. The desk checks formatting and cross-matches it with your in-text citations.</p>
+      <textarea id="refs" aria-label="Reference list" placeholder="Kotler, P., &amp; Keller, K. L. (2016). Marketing management (15th ed.). Pearson."></textarea>
+    </details>
+    <div class="row" style="margin-top:14px">
+      <button class="btn primary" id="check">Check draft</button>
+      <button class="btn" id="sample">Load a sample</button>
+      <button class="btn" id="clear">Clear</button>
+    </div>
+    <div class="err" id="err" role="alert"></div>
+    <div id="annotWrap" hidden>
+      <div class="legend" aria-label="Legend">
+        <span class="chip c-tone">Tone</span><span class="chip c-over">Overclaiming</span><span class="chip c-voice">Voice and depth</span>
+        <span class="chip c-cite">Needs a source</span><span class="chip c-apa">APA 7</span><span class="chip c-flow">Flow</span>
+      </div>
+      <div id="annot" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Feedback">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-tab="overview">Overview</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="tone">Tone<span class="n" id="n-tone"></span></button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="voice">Voice and depth<span class="n" id="n-voice"></span></button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="apa">APA 7<span class="n" id="n-apa"></span></button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="structure">Structure<span class="n" id="n-structure"></span></button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="flow">Flow<span class="n" id="n-flow"></span></button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="deep">Deep review</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="lang">Language help</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="phrases">Phrase bank</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="resources">Resources</button>
+    </div>
+    <div class="tabpane" id="pane-overview"><div id="ov"><p class="empty">Choose what you're writing and the section, paste your draft, then choose Check draft. Every highlight links to a note explaining what to revise.</p></div></div>
+    <div class="tabpane" id="pane-tone" hidden><div id="toneList"></div></div>
+    <div class="tabpane" id="pane-voice" hidden><div id="voiceList"></div></div>
+    <div class="tabpane" id="pane-apa" hidden><div id="apaList"></div></div>
+    <div class="tabpane" id="pane-structure" hidden><div id="structList"></div></div>
+    <div class="tabpane" id="pane-flow" hidden><div id="flowList"></div></div>
+    <div class="tabpane" id="pane-deep" hidden>
+      <h2>A closer read</h2>
+      <p class="why" style="margin-top:0">Claude reads the whole section as a reviewer for your kind of document would: its structural moves, how deeply you engage with sources, where your own position shows and where it's missing, and APA 7. You get diagnosis and questions to answer, never replacement sentences.</p>
+      <div class="row"><button class="btn primary" id="deepBtn">Get a deep review</button><button class="btn" id="stopBtn" hidden>Stop</button></div>
+      <div class="err" id="deepErr" role="alert"></div>
+      <div id="deepOut" aria-live="polite"></div>
+    </div>
+    <div class="tabpane" id="pane-lang" hidden>
+      <h2>Wording help, one sentence at a time</h2>
+      <p class="why" style="margin-top:0">Paste a sentence or two you've written (up to 80 words). You'll get two alternatives in academic register that keep your meaning and your claims. Nothing is added that only you can supply: where evidence or a source is needed, you'll see a placeholder such as [Author, Year] to fill in yourself. You can also choose Suggest wording on any flagged sentence in the other tabs.</p>
+      <textarea id="polishIn" rows="4" style="font-family:var(--serif);font-size:15.5px" aria-label="Sentence to polish" placeholder="Influencer marketing is really important for brands nowadays because it gets a lot of trust."></textarea>
+      <div class="row" style="margin-top:10px"><button class="btn primary" id="polishBtn">Suggest wording</button><span class="meta" id="polishCount"></span></div>
+      <div class="err" id="polishErr" role="alert"></div>
+      <div id="polishOut" aria-live="polite"></div>
+      <p class="meta" style="margin-top:16px">Treat suggestions as a starting point: adjust them until they sound like you. If you use them in a submission, check your journal's or university's policy on AI-assisted language editing; many publishers ask authors to disclose it.</p>
+    </div>
+    <div class="tabpane" id="pane-phrases" hidden>
+      <p class="why" style="margin-top:0">Content-neutral phrases grouped by what they do. Choose one to copy it, then build your own sentence around it. Use them to carry your point, not to replace it.</p>
+      <div id="pb"></div>
+    </div>
+    <div class="tabpane" id="pane-resources" hidden>
+      <p class="why" style="margin-top:0">The references this desk's rules draw on, and the ones worth keeping open while you write.</p>
+      <div class="res" id="resList"></div>
+    </div>
+  </section>
+</div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const rx=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+
+const SAMPLE=`Digital marketing has a huge impact on the buying behaviour of Gen Z consumers in India. In today's world, influencer marketing plays a vital role. Studies show that influencer credibility clearly increases purchase intention. This proves that brands can't ignore Instagram.
+
+Kumar & Sharma (2021) examined influencer credibility among urban students. Gupta, Rao and Menon (2020) found that 62% of respondents trusted micro-influencers. Singh (2019) studied brand recall in tier-2 cities. The regulatory environment has changed since the ASCI guidelines were issued (ASCI 2021).
+
+Influencer marketing offers robust, innovative, and effective opportunities for brands. It is important for trust, engagement, and loyalty. It is important for marketers to build credibility, authenticity, and relevance.
+
+However, little is known about how credibility shapes purchase intention in tier-2 and tier-3 cities. Therefore, this study aims to examine the effect of influencer credibility on the purchase intention of Gen Z consumers in these markets.`;
+
+/* ---------- lexicons ---------- */
+const INFORMAL=[["a lot of","considerable, numerous, or a specific quantity"],["lots of","considerable or numerous"],["huge","substantial or considerable"],["big","major or large-scale, or quantify it"],["really",""],["very","a more precise adjective, or quantify it"],["pretty",""],["got","obtained, received, or became"],["get","obtain, receive, or become"],["gets","obtains or becomes"],["things","name the specific concept"],["thing","name the specific concept"],["stuff","name the specific concept"],["kind of",""],["sort of",""],["basically",""],["nowadays","currently or in recent years"],["okay",""],["a bit","slightly or somewhat"],["anyway",""],["totally",""],["etc.","complete the list, or introduce it with such as"],["and so on","complete the list"]];
+const CLICHE=["in today's world","in today’s world","in this modern era","in the modern era","since time immemorial","it is a well-known fact","it is a well known fact","plays a vital role","play a vital role","plays a pivotal role","plays a crucial role","play a crucial role","in this fast-paced world","need of the hour","last but not least","each and every","day by day","delve into","delves into","in the realm of","navigate the complexities","a testament to","rich tapestry","ever-evolving landscape","ever-changing landscape","it is important to note that","it is worth noting that","in conclusion, it can be said","shed light on","sheds light on","pave the way","paves the way","a plethora of","a myriad of","game changer","game-changer","paradigm shift"];
+const OVER=["clearly","obviously","undoubtedly","proves","proved","prove","always","never","certainly","definitely","without doubt","without a doubt","no one","everyone","the best","it is certain","unquestionably","it is evident that"];
+const CLAIMS=["studies show","studies have shown","research shows","research has shown","research indicates","research suggests","it is found","it has been found","it is known","scholars argue","scholars agree","experts say","experts agree","evidence suggests","literature suggests","many researchers","several studies","previous studies","prior studies"];
+const GENERIC=["robust","innovative","enhanced","enhance","enhances","important","crucial","vital","novel","comprehensive","holistic","dynamic","effective","valuable","various","numerous","landscape","leverage","leverages","pivotal","seamless","seamlessly","cutting-edge","paramount","multifaceted","transformative","groundbreaking","unprecedented","meaningful","impactful","synergy","foster","fosters","underscores","underscore","intricate","key role","key factor","key driver","key aspect","essential"];
+const HEDGES=["may","might","could","appears to","appear to","seems to","seem to","suggests","suggest","suggested","likely","possibly","perhaps","tends to","tend to","indicates","indicate","arguably","to some extent","in part","partly","relatively","somewhat","generally","largely","potentially","plausibly","it is possible that"];
+const STANCE=["we argue","i argue","this study argues","this paper argues","this chapter argues","we contend","we propose","we suggest","contrary to","unlike","in contrast","by contrast","a limitation of","fails to","overlooks","overlook","does not account","do not account","remains unclear","surprisingly","unexpectedly","one explanation","a plausible explanation","a possible explanation","this suggests","this implies","notably","arguably","problematic","questionable","inconsistent","mixed","however","although","yet","whereas","what remains","less clear"];
+const CONNECT=["however","moreover","furthermore","in addition","additionally","similarly","likewise","in contrast","by contrast","conversely","nevertheless","nonetheless","therefore","thus","hence","consequently","as a result","accordingly","for example","for instance","specifically","in particular","notably","first","second","third","finally","subsequently","in turn","overall","taken together","whereas","while","although","despite","building on","consistent with","in line with","to this end","on the other hand","yet","this","these","such","that","those","it","they","their","its"];
+const STOP=new Set("a an the and or but if of in on at to for from by with as is are was were be been being this that these those it its their there which who whom whose what when where why how not no nor so than then too very can could may might must shall should will would do does did has have had having into onto over under about above below between among through during before after also such only own same other some any each few more most much many all both either neither our we us you your i my me he she his her they them study studies research paper findings".split(" "));
+const AWL_WORDS="abandon abstract academy access accommodate accompany accumulate accurate achieve acknowledge acquire adapt adequate adjacent adjust administrate adult advocate affect aggregate aid albeit allocate alter alternative ambiguous amend analogy analyse annual anticipate apparent append appreciate approach appropriate approximate arbitrary area aspect assemble assess assign assist assume assure attach attain attitude attribute author authority automate available aware behalf benefit bias bond brief bulk capable capacity category cease challenge channel chapter chart chemical circumstance cite civil clarify classic clause code coherent coincide collapse colleague commence comment commission commit commodity communicate community compatible compensate compile complement complex component compound comprehensive comprise compute conceive concentrate concept conclude concurrent conduct confer confine confirm conflict conform consent consequent considerable consist constant constitute constrain construct consult consume contact contemporary context contract contradict contrary contrast contribute controversy convene converse convert convince cooperate coordinate core corporate correspond couple create credit criteria crucial culture currency cycle data debate decade decline deduce define definite demonstrate denote deny depress derive design despite detect deviate device devote differentiate dimension diminish discrete discriminate displace display dispose distinct distort distribute diverse document domain domestic dominate draft drama duration dynamic economy edit element eliminate emerge emphasis empirical enable encounter energy enforce enhance enormous ensure entity environment equate equip equivalent erode error establish estate estimate ethic ethnic evaluate eventual evident evolve exceed exclude exhibit expand expert explicit exploit export expose external extract facilitate factor feature federal fee file final finance finite flexible fluctuate focus format formula forthcoming found foundation framework function fund fundamental furthermore gender generate generation globe goal grade grant guarantee guideline hence hierarchy highlight hypothesis identical identify ideology ignorant illustrate image immigrate impact implement implicate implicit imply impose incentive incidence incline income incorporate index indicate individual induce inevitable infer infrastructure inherent inhibit initial initiate injure innovate input insert insight inspect instance institute instruct integral integrate integrity intelligent intense interact intermediate internal interpret interval intervene intrinsic invest investigate invoke involve isolate issue item job journal justify label labour layer lecture legal legislate levy liberal licence likewise link locate logic maintain major manipulate manual margin mature maximise mechanism media mediate medical medium mental method migrate military minimal minimise minimum ministry minor mode modify monitor motive mutual negate network neutral nevertheless nonetheless norm normal notion notwithstanding nuclear objective obtain obvious occupy occur odd offset ongoing option orient outcome output overall overlap overseas panel paradigm paragraph parallel parameter participate partner passive perceive percent period persist perspective phase phenomenon philosophy physical plus policy portion pose positive potential practitioner precede precise predict predominant preliminary presume previous primary prime principal principle prior priority proceed process professional prohibit project promote proportion prospect protocol psychology publication publish purchase pursue qualitative quote radical random range ratio rational react recover refine regime region register regulate reinforce reject relax release relevant reluctance rely remove require research reside resolve resource respond restore restrain restrict retain reveal revenue reverse revise revolution rigid role route scenario schedule scheme scope section sector secure seek select sequence series sex shift significant similar simulate site sole somewhat source specific specify sphere stable statistic status straightforward strategy stress structure style submit subordinate subsequent subsidy substitute successor sufficient sum summary supplement survey survive suspend sustain symbol tape target task team technical technique technology temporary tense terminate text theme theory thereby thesis topic trace tradition transfer transform transit transmit transport trend trigger ultimate undergo underlie undertake uniform unify unique utilise valid vary vehicle version via violate virtual visible vision visual volume voluntary welfare whereas whereby widespread so-called".split(" ");
+const AWL_STEMS=[],AWL_EXACT=new Set();
+AWL_WORDS.forEach(w=>{const b=w.replace(/(e|y)$/,"");if(b.length>=4){AWL_STEMS.push(b);if(/is$/.test(b))AWL_STEMS.push(b.replace(/is$/,"iz"));if(/ys$/.test(b))AWL_STEMS.push(b.replace(/ys$/,"yz"));if(/our$/.test(b))AWL_STEMS.push(b.replace(/our$/,"or"));if(/ce$/.test(w))AWL_STEMS.push(w.replace(/ce$/,"s"))}else AWL_EXACT.add(w)});
+const isAWL=w=>AWL_EXACT.has(w)||AWL_EXACT.has(w.replace(/s$/,""))||AWL_STEMS.some(s=>w.startsWith(s));
+
+/* ---------- helpers ---------- */
+function splitParas(t){return t.replace(/\r/g,"").split(/\n\s*\n|\n(?=\s*\S)/).map(s=>s.trim()).filter(Boolean)}
+function splitSents(p){
+  const prot=p.replace(/\bet al\./g,"et al§").replace(/\be\.g\./gi,"e§g§").replace(/\bi\.e\./gi,"i§e§").replace(/\b(pp?|vs|Dr|No|Vol|ed|eds|Eds)\./g,"$1§").replace(/\b([A-Z])\.(?=\s?[A-Z]\.|\s[A-Z][a-z])/g,"$1§").replace(/(\d)\.(\d)/g,"$1§$2").replace(/(\s)\.(\d)/g,"$1§$2");
+  return (prot.match(/[^.!?]+[.!?]+["”’)]*|[^.!?]+$/g)||[prot]).map(s=>s.replace(/§/g,".").trim()).filter(Boolean);
+}
+const words=s=>(s.match(/[A-Za-z][A-Za-z'’-]*/g)||[]);
+const content=s=>new Set(words(s).map(w=>w.toLowerCase().replace(/['’]s$/,"")).filter(w=>w.length>3&&!STOP.has(w)).map(w=>w.slice(0,5)));
+function findAll(text,phrase){const out=[];const re=new RegExp("(^|[^A-Za-z])("+rx(phrase)+")(?![A-Za-z])","gi");let m;while((m=re.exec(text))){out.push([m.index+m[1].length,m.index+m[1].length+m[2].length]);if(re.lastIndex===m.index)re.lastIndex++}return out}
+const countAll=(text,list)=>list.reduce((n,w)=>n+findAll(text,w).length,0);
+const CITE_P=/\([^()]*\b(1[89]|20)\d{2}[a-z]?\b[^()]*\)|\([^()]*n\.d\.[^()]*\)/;
+const CITE_N=/\b[A-Z][A-Za-z'’-]+(?: et al\.| (?:and|&) [A-Z][A-Za-z'’-]+|, [A-Z][A-Za-z'’-]+,? (?:and|&) [A-Z][A-Za-z'’-]+)? \((1[89]|20)\d{2}/;
+const hasCite=s=>CITE_P.test(s)||CITE_N.test(s);
+const AUTHOR_LED=/^[A-Z][A-Za-z'’-]+(?: et al\.| (?:and|&) [A-Z][A-Za-z'’-]+|, [A-Z][A-Za-z'’-]+,? (?:and|&) [A-Z][A-Za-z'’-]+)? \((1[89]|20)\d{2}/;
+function hasSpecific(s){
+  if(hasCite(s)||/\d/.test(s)||/\b(e\.g\.|for example|for instance|such as|namely|specifically)\b/i.test(s))return true;
+  const w=s.split(/\s+/).slice(1);return w.some(x=>/^[A-Z][a-z]{2,}|^[A-Z]{2,}/.test(x)&&!/^(However|The|This|These|It|In|For|A|An|And|But|Such)$/.test(x.replace(/[^A-Za-z]/g,"")));
+}
+function opener(s){
+  const l=s.toLowerCase().replace(/^[^a-z]+/,"");
+  if(AUTHOR_LED.test(s))return "citation";
+  if(CONNECT.slice(0,39).some(c=>l.startsWith(c+" ")||l.startsWith(c+",")))return "connector";
+  if(/^(in|on|at|for|with|within|among|across|during|after|before|through|by|from|under|given|although|though|while|when|whereas|because|since|if|unlike|despite|as|to|drawing|building|using|based|beyond|compared)\b/.test(l))return "clause";
+  if(/^[a-z]+(ing|ed)\b/.test(l)&&!/^(indeed|need|seed|red)\b/.test(l))return "participle";
+  return "subject";
+}
+
+/* ---------- analysis ---------- */
+function analyse(text,refsText,section,doc){
+  const paras=splitParas(text);const A=[];let id=0;
+  const add=(cat,pi,start,end,title,why,tab)=>{A.push({id:id++,cat,pi,start,end,title,why,tab})};
+  const sentInfo=[];let totalWords=0,awlHits=0,contentWords=0,triads=[];
+  const allSents=[];
+  paras.forEach((p,pi)=>{
+    const sents=splitSents(p);sentInfo[pi]=sents;
+    const pw=words(p);totalWords+=pw.length;
+    pw.forEach(w=>{const lw=w.toLowerCase();if(lw.length>3&&!STOP.has(lw)){contentWords++;if(isAWL(lw))awlHits++}});
+    /* tone */
+    INFORMAL.forEach(([w,alt])=>findAll(p,w).forEach(([s,e])=>add("tone",pi,s,e,"Informal: “"+p.slice(s,e)+"”",alt?"Consider "+alt+".":"Usually removable; if emphasis matters, show it with evidence.","tone")));
+    CLICHE.forEach(w=>findAll(p,w).forEach(([s,e])=>add("tone",pi,s,e,"Stock phrase: “"+p.slice(s,e)+"”","Filler that could sit in any paper. Say what specifically is happening, to whom, and on what evidence.","tone")));
+    let m;const reC=/\b[A-Za-z]+(?:n['’]t|['’](?:re|ve|ll|d|m))\b/g;
+    while((m=reC.exec(p)))add("tone",pi,m.index,m.index+m[0].length,"Contraction: “"+m[0]+"”","Write contractions out in full in academic prose.","tone");
+    const reI=/\b(I think|I believe|I feel|in my opinion|we can see that|as we all know)\b/gi;
+    while((m=reI.exec(p)))add("tone",pi,m.index,m.index+m[0].length,"Opinion framing: “"+m[0]+"”","APA 7 allows first person for your own research actions and arguments (“we argue”), but “I think” frames a claim as a feeling. State the argument and its grounds.","tone");
+    const reY=/\b(you|your)\b/gi;
+    while((m=reY.exec(p)))add("tone",pi,m.index,m.index+m[0].length,"Second person: “"+m[0]+"”","Address the phenomenon, not the reader. Name the group you mean (consumers, managers, firms).","tone");
+    OVER.forEach(w=>findAll(p,w).forEach(([s,e])=>add("over",pi,s,e,"Overclaim: “"+p.slice(s,e)+"”","Match certainty to evidence. Hedges such as suggests, tends to, or may are more defensible unless the evidence is conclusive.","tone")));
+    const reStack=/\b(may|might|could)\s+(possibly|perhaps|potentially|probably)\b|\b(seems?|appears?) to (suggest|indicate) that .{0,30}\b(may|might|could)\b|\bit (may|might|could) be (possible|argued) that\b/gi;
+    while((m=reStack.exec(p)))add("voice",pi,m.index,m.index+m[0].length,"Stacked hedge: “"+m[0]+"”","Two hedges on one claim make it sound evasive. Keep the one that matches how certain the evidence is.","voice");
+    /* sentence-level */
+    let off=0;
+    sents.forEach((s,si)=>{
+      const st=p.indexOf(s,off);off=st+s.length;const wc=words(s).length;const cited=hasCite(s);
+      allSents.push({s,pi,st,wc});
+      CLAIMS.forEach(c=>findAll(s,c).forEach(([a,b])=>{if(!cited)add("cite",pi,st+a,st+b,"Unsupported literature claim","“"+s.slice(a,b)+"” points to the literature. Name the specific studies (Author, Year), and say what they found.","apa")}));
+      const pc=s.match(/\d+(?:\.\d+)?\s?(?:%|per cent|percent)/);
+      if(pc&&!cited&&!["results","method"].includes(section))add("cite",pi,st+pc.index,st+pc.index+pc[0].length,"Statistic without a source","Every figure from outside your own data needs a citation so the reader can verify it.","apa");
+      if(/\?\s*["”’)]*$/.test(s))add("tone",pi,st,st+Math.min(s.length,60),"Rhetorical question","Turn it into a statement of the problem, or a research question you then answer.","tone");
+      if(/!/.test(s))add("tone",pi,st+s.indexOf("!"),st+s.indexOf("!")+1,"Exclamation mark","Avoid in academic prose.","tone");
+      if(/^\d/.test(s))add("apa",pi,st,st+(s.match(/^\S+/)[0].length),"Numeral starting a sentence","APA 7: spell out a number that begins a sentence, or reword.","apa");
+      if(wc>40)add("flow",pi,st,st+Math.min(s.length,70),"Long sentence ("+wc+" words)","Readers lose the thread past about 35 words. Split so each sentence carries one claim.","flow");
+      const vt=s.match(/^(This|These|That|Those|It)\s+(is|was|are|were|shows?|showed|means|meant|suggests?|indicates?|leads?|led|results?|proves?|implies)\b/);
+      if(vt&&!/^It (is|was) \w+ (to|that)\b/.test(s))add("flow",pi,st,st+vt[0].length,"Unattached “"+vt[1]+"”","Add a noun so the reference is unmistakable, for example “This finding” or “These results”.","flow");
+      if(si>0){
+        const prev=sents[si-1];const ov=[...content(s)].filter(x=>content(prev).has(x)).length;
+        const start=s.toLowerCase().replace(/^[^a-z]+/,"");
+        const linked=CONNECT.some(c=>start.startsWith(c+" ")||start.startsWith(c+","));
+        if(ov===0&&!linked)add("flow",pi,st,st+Math.min(s.length,55),"Possible break in connection","This sentence shares no key terms with the one before and has no linking signal. Show how it follows: repeat a key term, refer back, or add a transition.","flow");
+      }
+      /* voice: generic words without specifics */
+      const gen=[];GENERIC.forEach(g=>findAll(s,g).forEach(r=>gen.push(r)));
+      if(gen.length&&!hasSpecific(s)){
+        if(gen.length>=2)add("voice",pi,st,st+Math.min(s.length,80),"Sounds academic but says little","This sentence leans on evaluative words (“"+gen.map(([a,b])=>s.slice(a,b)).join("”, “")+"”) with no evidence, example or source. Ask: important for whom, compared with what, shown by which study?","voice");
+        else gen.forEach(([a,b])=>add("voice",pi,st+a,st+b,"Generic word: “"+s.slice(a,b)+"”","An evaluative word with nothing specific behind it. Show what makes it so (a figure, a source, a comparison), or choose a more precise term.","voice"));
+      }
+      /* rule of three */
+      const reT=/\b([A-Za-z-]+), ([A-Za-z-]+(?: [A-Za-z-]+)?),? (?:and|or) ([A-Za-z-]+)\b(?! \((?:1[89]|20)\d{2})/g;let t;
+      while((t=reT.exec(s))){const before=s.slice(0,t.index);if((before.match(/\(/g)||[]).length>(before.match(/\)/g)||[]).length)continue;triads.push({pi,start:st+t.index,end:st+t.index+t[0].length,txt:t[0]})}
+    });
+    /* results stats */
+    if(section==="results"||section==="discussion"){
+      sents.forEach(s=>{const st=p.indexOf(s);
+        const sg=s.match(/\bsignificant(ly)?\b/i);
+        if(sg&&section==="results"&&!/\bp\s*[<=>]|β|\bbeta\b|\bt\s*\(|\bF\s*\(|χ|\br\s*=|\bCI\b|confidence interval/i.test(s))add("apa",pi,st+sg.index,st+sg.index+sg[0].length,"“Significant” without a statistic","In results, report the test and value with the claim, for example the coefficient, test statistic and p value.","apa");
+      });
+      const reP0=/\bp\s*[=<>]\s*0\.\d+/g;while((m=reP0.exec(p)))add("apa",pi,m.index,m.index+m[0].length,"Leading zero in p value","APA 7 drops the leading zero for values that cannot exceed 1: write p = .03, not p = 0.03.","apa");
+      const reP000=/\bp\s*=\s*0?\.000\b/g;while((m=reP000.exec(p)))add("apa",pi,m.index,m.index+m[0].length,"p = .000","Report as p < .001; a p value is never exactly zero.","apa");
+      const reSp=/\b[pPtFr][=<>]\S/g;while((m=reSp.exec(p)))add("apa",pi,m.index,m.index+m[0].length,"Spacing around symbols","Put a space either side of =, < and > in statistics (p < .05).","apa");
+    }
+    /* tense */
+    if(doc!=="synopsis"&&(section==="method"||section==="results")){
+      const reW=/\bwill (be|use|collect|examine|analy[sz]e|test|employ|adopt|conduct)\b/gi;
+      while((m=reW.exec(p)))add("tone",pi,m.index,m.index+m[0].length,"Future tense in a completed study","Report work that has been done in the past tense (“Data were collected…”). Future tense suits proposals and synopses.","tone");
+    }
+    /* paragraph-level */
+    const starts=sents.map(s=>(s.match(/^[A-Za-z]+/)||[""])[0].toLowerCase()).filter(Boolean);
+    const freq={};starts.forEach(w=>freq[w]=(freq[w]||0)+1);
+    Object.entries(freq).forEach(([w,n])=>{if(n>=3&&w!=="the")add("flow",pi,-1,-1,"Repeated sentence opening","Paragraph "+(pi+1)+" opens "+n+" sentences with “"+w+"”. Vary the openings so the argument, not the pattern, leads.","flow")});
+    if(sents.length===1&&paras.length>1&&section!=="abstract")add("flow",pi,-1,-1,"One-sentence paragraph","Paragraph "+(pi+1)+" has a single sentence. Develop it (claim, evidence, interpretation) or merge it with a neighbour.","structure");
+    if(pw.length>230)add("flow",pi,-1,-1,"Very long paragraph ("+pw.length+" words)","Paragraph "+(pi+1)+" may hold more than one idea. Split where the focus changes.","structure");
+    const first=sents[0]||"";
+    if(section!=="abstract"&&(/^[“"(]/.test(first)||AUTHOR_LED.test(first)||/^\d/.test(first)))add("flow",pi,-1,-1,"Paragraph opens with a source, quote or number","Paragraph "+(pi+1)+" begins with evidence rather than your point. Open with a topic sentence that states the idea, then bring in the source.","structure");
+    if(sents.length>=5){const ls=sents.map(s=>words(s).length);const mu=ls.reduce((a,b)=>a+b,0)/ls.length;const sd=Math.sqrt(ls.reduce((a,b)=>a+(b-mu)**2,0)/ls.length);if(sd<4)add("flow",pi,-1,-1,"Even sentence rhythm","Sentences in paragraph "+(pi+1)+" are all about "+Math.round(mu)+" words. A short sentence after a long one is a good place to put your key point.","flow")}
+    apaInline(p,pi,add);
+  });
+
+  /* triads */
+  const triadRate=totalWords?triads.length/totalWords*150:0;
+  if(triads.length>=3||triadRate>1.2){triads.forEach(t=>add("voice",t.pi,t.start,t.end,"List of three: “"+t.txt+"”","This section uses "+triads.length+" three-item lists. Check each: are all three items distinct and needed? Often one item, developed with evidence, says more than three named in passing.","voice"))}
+
+  /* section-level: rhythm and variety */
+  const lens=allSents.map(x=>x.wc);
+  let cv=0,minL=0,maxL=0;
+  if(lens.length){const mu=lens.reduce((a,b)=>a+b,0)/lens.length;const sd=Math.sqrt(lens.reduce((a,b)=>a+(b-mu)**2,0)/lens.length);cv=mu?sd/mu:0;minL=Math.min(...lens);maxL=Math.max(...lens)}
+  if(lens.length>=8&&cv<0.3)add("flow",-1,-1,-1,"Uniform rhythm across the section","Sentence lengths vary little across the whole section ("+minL+" to "+maxL+" words). Let length follow meaning: short sentences for key claims, longer ones for qualified reasoning.","flow");
+  const ops={};allSents.forEach(x=>{const o=opener(x.s);ops[o]=(ops[o]||0)+1});
+  if(allSents.length>=8){const top=Object.entries(ops).sort((a,b)=>b[1]-a[1])[0];if(top&&top[1]/allSents.length>=0.8)add("flow",-1,-1,-1,"Most sentences open the same way","About "+Math.round(top[1]/allSents.length*100)+"% of sentences open with a "+(top[0]==="subject"?"subject (“The study…”, “Consumers…”)":top[0])+". Some variety (a contrast, a condition, a reference back) helps readers see how ideas relate.","flow")}
+  const frames={};allSents.forEach(x=>{const f=words(x.s).slice(0,3).join(" ").toLowerCase();if(f.split(" ").length===3)(frames[f]=frames[f]||[]).push(x)});
+  Object.entries(frames).forEach(([f,xs])=>{if(xs.length>=3)xs.forEach(x=>add("voice",x.pi,x.st,x.st+f.length,"Repeated sentence frame: “"+f+"…”",xs.length+" sentences begin with the same three words. Repeated frames make paragraphs feel templated; vary how each claim is introduced.","voice"))});
+  if(paras.length>=3){
+    const fo={},lo={};
+    paras.forEach((p,pi)=>{const ss=sentInfo[pi];const f=(ss[0].match(/^[A-Za-z]+/)||[""])[0].toLowerCase();const l=(ss[ss.length-1].match(/^[A-Za-z]+/)||[""])[0].toLowerCase();if(f)fo[f]=(fo[f]||0)+1;if(ss.length>1&&l)lo[l]=(lo[l]||0)+1});
+    Object.entries(fo).forEach(([w,n])=>{if(n>=3&&w!=="the")add("voice",-1,-1,-1,"Paragraphs share a template",n+" paragraphs open with “"+w+"”. When every paragraph starts the same way, the section reads as a template rather than an argument.","voice")});
+    Object.entries(lo).forEach(([w,n])=>{if(n>=3&&["thus","therefore","overall","hence","consequently","this","taken","in","these"].includes(w))add("voice",-1,-1,-1,"Paragraphs close the same way",n+" paragraphs end with a sentence beginning “"+w+"”. Vary how you land each point.","voice")});
+  }
+
+  /* hedging balance and stance */
+  const hedges=countAll(text,HEDGES),stance=countAll(text,STANCE);
+  const hedgeRate=totalWords?hedges/totalWords*100:0;
+  const claimy=["intro","lit","discussion","implications","conclusion","general","abstract","hyp"].includes(section);
+  if(claimy&&totalWords>=100&&hedgeRate<0.4)add("voice",-1,-1,-1,"Few qualifications","The section states almost everything with full confidence ("+hedges+" hedge"+(hedges===1?"":"s")+" in "+totalWords+" words). Where evidence is partial, contextual or from a single study, say so; qualification signals judgement, not weakness.","voice");
+  if(totalWords>=80&&hedgeRate>4)add("voice",-1,-1,-1,"Heavy hedging","There are "+hedges+" hedges in "+totalWords+" words. When everything is qualified, the reader can't tell what you're confident about. Commit where your evidence is strong.","voice");
+  const stanceRate=totalWords?stance/totalWords*150:0;
+  if(["lit","discussion","intro","general","review"].includes(section)&&totalWords>=120&&stanceRate<0.8)add("voice",-1,-1,-1,"Little of your own position is visible","Few words signal evaluation, contrast or argument. Where do you agree, disagree, or see a limitation in what you cite? Your view of the evidence is what makes this section yours.","voice");
+  const citedSents=allSents.filter(x=>hasCite(x.s));
+  if(["lit","discussion","intro"].includes(section)&&citedSents.length>=3){
+    const engaged=citedSents.filter(x=>countAll(x.s,STANCE)>0||/\b(consistent with|in line with|supports?|extends?|contradicts?|challenges?|limited|only|did not|although)\b/i.test(x.s)).length;
+    if(engaged/citedSents.length<0.25)add("voice",-1,-1,-1,"Sources reported, rarely evaluated","Only "+engaged+" of "+citedSents.length+" sentences with citations compare, qualify or critique the source. Try asking of each study: how does it relate to the others, and what are its limits?","voice");
+  }
+
+  const citedNames=inTextNames(text);
+  refsCheck(refsText,citedNames,add);
+  const struct=structure(section,doc,paras,sentInfo,text,totalWords,add);
+  return {paras,A,sentInfo,totalWords,awl:contentWords?awlHits/contentWords:0,struct,hedgeRate,triads:triads.length,minL,maxL,cv,nSents:allSents.length};
+}
+
+function apaInline(p,pi,add){
+  let m;const reP=/\(([^()]*?)\)/g;
+  while((m=reP.exec(p))){
+    const inner=m[1],s=m.index,e=m.index+m[0].length;
+    if(!/\b(1[89]|20)\d{2}[a-z]?\b|n\.d\./.test(inner))continue;
+    if(/^(19|20)\d{2}[a-z]?(, p{1,2}\.)?/.test(inner.trim()))continue;
+    if(/et\.\s?al/.test(inner))add("apa",pi,s,e,"“et. al.” should be “et al.”","Only “al.” takes a period.","apa");
+    else if(/et al(?!\.)/.test(inner))add("apa",pi,s,e,"Missing period in “et al.”","Write “et al.” with a period after “al”.","apa");
+    inner.split(";").forEach(part=>{
+      if(/[A-Za-z)]\s+(1[89]|20)\d{2}/.test(part)&&!/,\s*(1[89]|20)\d{2}/.test(part))add("apa",pi,s,e,"Missing comma before the year","Parenthetical citations take a comma: (Author, 2021).","apa");
+      if(/[A-Z][a-z]+ and [A-Z][a-z]+/.test(part))add("apa",pi,s,e,"Use “&” inside parentheses","APA 7 uses “&” between authors in parenthetical citations and “and” in narrative ones.","apa");
+      if(/[A-Z][a-z]+, [A-Z][a-z]+,? (?:&|and) [A-Z][a-z]+/.test(part))add("apa",pi,s,e,"Three or more authors listed in full","APA 7: for three or more authors, cite the first author followed by “et al.” from the first citation.","apa");
+    });
+    if(/\bpg\.?\s?\d/.test(inner))add("apa",pi,s,e,"Use “p.” not “pg.”","Page numbers take “p.” (one page) or “pp.” (a range).","apa");
+  }
+  const reN=/\b([A-Z][a-z]+) & ([A-Z][a-z]+) \((1[89]|20)\d{2}/g;
+  while((m=reN.exec(p)))add("apa",pi,m.index,m.index+m[0].length,"Use “and” in narrative citations","In running text write “"+m[1]+" and "+m[2]+"”; keep “&” for parentheses.","apa");
+  const reN3=/\b([A-Z][a-z]+), ([A-Z][a-z]+),? (?:and|&) ([A-Z][a-z]+) \(((?:1[89]|20)\d{2})/g;
+  while((m=reN3.exec(p)))add("apa",pi,m.index,m.index+m[0].length,"Three or more authors listed in full","APA 7: write “"+m[1]+" et al. ("+m[4]+")” from the first citation.","apa");
+  const reQ=/[“"]([^”"]{12,})[”"]\s*(\([^()]*\))?/g;
+  while((m=reQ.exec(p))){const c=m[2]||"";const after=p.slice(m.index+m[0].length,m.index+m[0].length+40);
+    if(!/p{1,2}\.\s?\d|para\./.test(c)&&!/\(p{1,2}\.\s?\d/.test(after))add("apa",pi,m.index,m.index+m[0].length,"Direct quote without a page number","APA 7: direct quotations need a page (p. 12) or paragraph number. Consider paraphrasing, which also shows your understanding.","apa")}
+}
+
+const ORIG={};
+function inTextNames(t){
+  const names=new Set();let m;const keep=n=>{ORIG[n.toLowerCase()]=n;return n.toLowerCase()};
+  const reP=/\(([^()]*?(?:1[89]|20)\d{2}[^()]*?)\)/g;
+  while((m=reP.exec(t)))m[1].split(";").forEach(part=>{const n=part.trim().match(/^(?:e\.g\.,?\s*|see\s+)?([A-Z][A-Za-z'’-]+)/);if(n&&!/^(Table|Figure|Chapter|See)$/.test(n[1]))names.add(keep(n[1]))});
+  const reN=/\b([A-Z][A-Za-z'’-]+)(?: et al\.| (?:and|&) [A-Z][A-Za-z'’-]+|, [A-Z][A-Za-z'’-]+,? (?:and|&) [A-Z][A-Za-z'’-]+)? \((?:1[89]|20)\d{2}/g;
+  while((m=reN.exec(t)))if(!/^(In|The|This|As|Recently|Similarly|However|According|Table|Figure)$/.test(m[1]))names.add(keep(m[1]));
+  return names;
+}
+
+function refsCheck(rt,cited,add){
+  const lines=(rt||"").split(/\n/).map(s=>s.trim()).filter(Boolean);
+  if(!lines.length){if(cited.size)add("apa",-1,-1,-1,"No reference list added","Paste your references under “Reference list” to cross-check the "+cited.size+" source"+(cited.size>1?"s":"")+" cited in this draft.","apa");return}
+  const firsts=[];
+  lines.forEach((l,i)=>{
+    const tag="Reference "+(i+1)+": “"+l.slice(0,48)+(l.length>48?"…":"")+"”";
+    if(!/\((?:1[89]|20)\d{2}[a-z]?(?:, [A-Z][a-z]+(?: \d{1,2})?)?\)\.|\(n\.d\.\)\./.test(l))add("apa",-1,-1,-1,"Year not in APA position",tag+". The year goes in parentheses after the authors, followed by a period: (2021).","apa");
+    if(/retrieved from/i.test(l))add("apa",-1,-1,-1,"“Retrieved from” is no longer needed",tag+". APA 7 lists the URL directly, except for content designed to change over time.","apa");
+    if(/\bdoi:\s*10\.|\bDOI\s*10\./i.test(l)&&!/https:\/\/doi\.org\//.test(l))add("apa",-1,-1,-1,"DOI format",tag+". Present DOIs as links: https://doi.org/10.xxxx/xxxx","apa");
+    const auth=l.split(/\(\s*(?:1[89]|20)\d{2}|\(n\.d\./)[0];
+    const initials=(auth.match(/[A-Z]\.(?:\s?[A-Z]\.)*/g)||[]).length;
+    if(initials>=2&&!/&/.test(auth))add("apa",-1,-1,-1,"Missing “&” before the last author",tag+". APA 7 places “&” before the final author in the reference list.","apa");
+    const f=(l.match(/^([A-Z][A-Za-z'’-]+)/)||[])[1];if(f){firsts.push(f.toLowerCase());if(!ORIG[f.toLowerCase()])ORIG[f.toLowerCase()]=f}
+  });
+  for(let i=1;i<firsts.length;i++)if(firsts[i]<firsts[i-1]){add("apa",-1,-1,-1,"Reference list not alphabetical","Order entries alphabetically by the first author's surname (check around entry "+(i+1)+").","apa");break}
+  const listed=new Set(firsts);
+  cited.forEach(n=>{if(!listed.has(n))add("apa",-1,-1,-1,"Cited but not in the reference list","“"+(ORIG[n]||n)+"” appears in your text but no reference entry starts with that surname.","apa")});
+  listed.forEach(n=>{if(!cited.has(n))add("apa",-1,-1,-1,"Listed but not cited","“"+(ORIG[n]||n)+"” is in your reference list but not cited in this draft. Fine if it's cited in another section.","apa")});
+}
+
+/* ---------- structure rubrics ---------- */
+const THEORY=/\b(theory|theories|model|framework|TAM|UTAUT|planned behaviou?r|S-O-R|stimulus[- ]organism[- ]response|resource-based view|RBV|institutional|stakeholder|agency|signalling|signaling|social exchange|diffusion of innovation|uses and gratifications|expectation[- ]confirmation)\b/i;
+const RUBRIC={
+ abstract:[
+  ["Purpose","What the study sets out to do.",/\b(purpose|aims?|objective|this (study|paper|article|chapter|research) (examines|investigates|explores|analy[sz]es|develops|proposes|assesses))\b/i],
+  ["Design and method","Approach, data and sample.",/\b(survey|data|sample|respondents|interviews?|regression|SEM|PLS|case study|qualitative|quantitative|mixed[- ]method|systematic (literature )?review|bibliometric|meta-analysis|experiment)\b/i],
+  ["Findings","The main results, stated concretely.",/\b(find|finds|found|findings|results?|reveals?|shows?|indicates?|confirms?)\b/i],
+  ["Originality or value","What is new, and for whom.",/\b(original|originality|novel|first|contribut|value|extends?|adds? to|fills?)\w*/i],
+  ["Implications","Why managers, policymakers or researchers should care.",/\b(implications?|managers?|practitioners?|policy|policymakers?|marketers?)\b/i]],
+ intro:[
+  ["Establishes the territory","Why the topic matters in the field or in practice.",/\b(increasing|growing|significant|important|central|widely|rapid|emerg|expan|India|Indian|market|sector|firms?|consumers?)\w*/i],
+  ["Reviews what is already known","Prior research, with citations.",null],
+  ["Identifies the gap","What remains unknown or contested.",/\b(however|little is known|limited (research|attention|evidence)|scant|remains? (unclear|unexplored|underexplored)|few studies|gap|yet to be|has not been|have not been|overlooked|inconsistent|mixed findings)\b/i],
+  ["States purpose and contribution","What this work does, and what it adds.",/\b(this (study|paper|article|chapter|research)|the present study|the purpose|aims? to|seeks? to|objectives?|contribut\w*)\b/i]],
+ lit:[
+  ["Anchored in theory","Names the theory or framework that organises the review.",THEORY],
+  ["Organised by theme, not by author","Ideas lead; sources support them.",null],
+  ["Synthesises across sources","Compares, contrasts or groups studies rather than listing them.",/\b(similarly|likewise|in contrast|by contrast|whereas|consistent with|in line with|contrary to|together|collectively|both|while|however|on the other hand)\b/i],
+  ["Evaluates the evidence","Comments on samples, methods, context or limits.",/\b(limited|limitation|small sample|context|although|did not|only|focus(ed)? on|restricted|generali[sz])\w*/i],
+  ["Leads toward the gap","Ends by showing what the literature leaves unresolved.",/\b(little is known|remains?|gap|unexplored|underexplored|few studies|yet to|not been|scant|limited)\b/i]],
+ hyp:[
+  ["Grounded in theory","The reasoning draws on a named theory.",THEORY],
+  ["Supported by prior evidence","Cites studies that motivate each hypothesis.",null],
+  ["Reasoning leads to the hypothesis","The logic is spelled out before the statement.",/\b(therefore|thus|hence|accordingly|consequently|it follows)\b/i],
+  ["Hypotheses are labelled and directional","H1, H2… with a stated direction.",/\bH\d+[a-z]?\b[^.]*\b(positive|negative|positively|negatively|increase|decrease|higher|lower|stronger|weaker|moderat|mediat)\w*/i]],
+ gap:[
+  ["States the gap precisely","Names what is missing: context, population, variable or method.",/\b(gap|little is known|limited|unexplored|underexplored|few studies|yet to|not been|scant)\b/i],
+  ["Objectives use measurable verbs","To examine, assess, analyse, compare, identify.",/\b(to (examine|assess|analy[sz]e|evaluate|compare|identify|investigate|measure|determine|explore))\b/i],
+  ["Hypotheses are testable","Stated with direction and variables (H1, H2).",/\b(H\d|hypothes[ie]s|null hypothesis|significant (effect|relationship|difference))\b/i],
+  ["Objectives align with the gap","Each objective answers part of the stated gap.",null]],
+ method:[
+  ["Research design","Descriptive, exploratory, causal, mixed methods.",/\b(research design|descriptive|exploratory|causal|mixed[- ]method|quantitative|qualitative|cross-sectional|longitudinal|experimental|case study)\b/i],
+  ["Population and sample","Who, where, and how many.",/\b(population|sample size|respondents|participants|sample of|N\s?=)\b/i],
+  ["Sampling technique","How participants were selected, and why.",/\b(random|stratified|purposive|convenience|snowball|quota|systematic|judgmental|cluster)\s*sampling\b/i],
+  ["Instrument and measures","Questionnaire, scales and their sources.",/\b(questionnaire|scale|likert|instrument|interview (schedule|protocol|guide)|adapted from|items?)\b/i],
+  ["Reliability and validity","Pilot, Cronbach's alpha, validity checks.",/\b(pilot|cronbach|reliabilit|validit|composite reliability|AVE|HTMT)\w*/i],
+  ["Data analysis","Techniques matched to objectives or hypotheses.",/\b(regression|SEM|structural equation|ANOVA|t-test|chi-square|factor analysis|SPSS|AMOS|SmartPLS|PLS|thematic analysis|correlation|NVivo)\b/i],
+  ["Ethical considerations","Consent, confidentiality, approval.",/\b(consent|confidential|anonym|ethic|approval)\w*/i]],
+ results:[
+  ["Measurement quality reported","Reliability and validity before hypothesis tests.",/\b(cronbach|reliabilit|validit|AVE|composite reliability|HTMT|CFA|confirmatory|loadings?)\w*/i],
+  ["Tests reported with statistics","Coefficients, test values and p values.",/(β|\bbeta\b|\bt\s*\(|\bF\s*\(|χ|\bp\s*[<=]|\bR2\b|R²|\bCFI\b|\bRMSEA\b)/i],
+  ["Linked to hypotheses","Each result tied back to H1, H2…",/\b(H\d+|hypothes[ie]s)\b/i],
+  ["Tables and figures referenced","Text points readers to the evidence.",/\b(Table|Figure) \d/]],
+ discussion:[
+  ["Restates the key findings","Opens with what was found, briefly.",/\b(results?|findings?|this (study|paper) (found|shows|reveals|indicates))\b/i],
+  ["Compares with prior research","Where findings agree or disagree with others.",/\b(consistent with|in line with|contrary to|supports?|corroborat|contradict|diverge|echo|unlike|similar to)\w*/i],
+  ["Offers explanations","Why the results came out as they did.",/\b(explanation|may (be|reflect)|could (be|reflect)|possibly because|one reason|this (may|might|could)|attributed to|due to)\b/i],
+  ["Engages with unexpected results","Doesn't skip findings that went against expectation.",/\b(unexpected|surprising|contrary to (our )?expectations?|not supported|non-significant|insignificant)\w*/i],
+  ["Connects to implications","Points toward theory and practice.",/\b(implications?|managers?|practitioners?|policy|theor)\w*/i]],
+ implications:[
+  ["Theoretical implications","What the work adds to theory or the literature.",/\b(theor\w*|literature|extends|contributes? to (the )?(understanding|literature|theory))\b/i],
+  ["Managerial or practical implications","Specific actions for managers or marketers.",/\b(managers?|practitioners?|marketers?|firms?|brands?|organi[sz]ations?)\b[^.]*\b(should|can|could|may|need to)\b/i],
+  ["Policy implications","For regulators or government, where relevant.",/\b(policy|policymakers?|regulators?|government|ASCI|SEBI|RBI|ministry)\b/i],
+  ["Grounded in the findings","Each implication traces to a specific result.",/\b(given (that|the)|because|finding|result|shows?|indicates?)\b/i]],
+ limits:[
+  ["Names the limitations","Design, sample, measures or context.",/\b(limitations?|limited to|cross-sectional|self-reported|single (city|country|industry|context)|convenience sample|cannot be generali[sz]ed|generali[sz]ab)\w*/i],
+  ["Explains their consequence","How each limitation affects interpretation.",/\b(therefore|thus|may (bias|limit|affect|inflate|restrict)|should be interpreted|caution)\b/i],
+  ["Future research follows from them","Suggestions address the limitations named.",/\b(future (research|studies|work)|further research|could (examine|explore|investigate|extend|test)|longitudinal)\b/i]],
+ conclusion:[
+  ["Answers the research question","States what the work has shown.",/\b(this (study|paper|chapter|thesis|article) (has )?(shown|demonstrated|found|examined|argued|established))\b/i],
+  ["States the contribution","What is now known that wasn't before.",/\b(contribut|extends?|advances?|adds? to|new (insight|evidence|understanding))\w*/i],
+  ["Closes with significance","Why it matters going forward.",/\b(implications?|important for|matters?|future|going forward|for (managers|policymakers|researchers))\b/i]],
+ general:[]
+};
+function structure(section,doc,paras,sentInfo,text,W,add){
+  const rows=[];
+  (RUBRIC[section]||[]).forEach(([name,desc,re])=>{
+    let status="weak",note="";
+    if(name==="Reviews what is already known"||name==="Supported by prior evidence"){const n=(text.match(/\([^()]*?(1[89]|20)\d{2}[^()]*\)|\b[A-Z][a-z]+ (?:et al\. )?\((1[89]|20)\d{2}/g)||[]).length;status=n>=2?"ok":n===1?"weak":"miss";note=n+" citation"+(n===1?"":"s")+" found."}
+    else if(name==="Organised by theme, not by author"){
+      let a=0,t=0;sentInfo.forEach(ss=>ss.forEach(s=>{t++;if(AUTHOR_LED.test(s))a++}));const r=t?a/t:0;
+      status=r>0.4?"miss":r>0.2?"weak":"ok";note=Math.round(r*100)+"% of sentences begin with an author name. "+(r>0.2?"This often reads as a list of summaries. Lead with the idea, then cite.":"Ideas lead; sources support.");
+    }
+    else if(name==="Objectives align with the gap"||name==="Grounded in the findings"&&!re){status="weak";note="Check by hand, or use the deep review."}
+    else if(name==="Policy implications"){const hit=text.match(re);status=hit?"ok":"weak";note=hit?"Signal found: “"+hit[0]+"”.":"Optional. Include if your findings speak to regulation or public policy."}
+    else if(name==="Engages with unexpected results"){const hit=text.match(re);status=hit?"ok":"weak";note=hit?"Signal found: “"+hit[0]+"”.":"If any hypothesis was not supported, discuss it here rather than passing over it."}
+    else if(re){const hit=text.match(re);status=hit?"ok":"miss";note=hit?"Signal found: “"+hit[0]+"”.":"No clear signal found. If this move is present, make it more explicit."}
+    rows.push({name,desc,status,note});
+  });
+  if(section==="abstract"){
+    if(W>250)add("flow",-1,-1,-1,"Abstract may be too long ("+W+" words)","Many management journals cap abstracts at 150 to 250 words. Check your target journal's author guidelines.","structure");
+    if(W<100)add("flow",-1,-1,-1,"Abstract may be too short ("+W+" words)","Make sure purpose, method, findings and value each get a clear sentence.","structure");
+    if(hasCite(text))add("apa",-1,-1,-1,"Citations in the abstract","Abstracts usually stand alone without citations. Check your target journal's guidelines.","structure");
+  }
+  if(section==="conclusion"){const n=(text.match(/\([^()]*?(1[89]|20)\d{2}[^()]*\)/g)||[]).length;if(n>3)add("flow",-1,-1,-1,"Many citations in the conclusion","Conclusions rarely bring in new sources. Keep the focus on what your work has shown.","structure")}
+  return rows;
+}
+
+/* ---------- render ---------- */
+let last=null;
+function rate(n,words,t1,t2){const per=words?n/words*100:0;return per<=t1?["Strong","good"]:per<=t2?["Needs polish","warn"]:["Needs work","bad"]}
+function render(res){
+  last=res;const {paras,A}=res;
+  const byP={};A.filter(a=>a.start>=0).forEach(a=>(byP[a.pi]=byP[a.pi]||[]).push(a));
+  $("annot").innerHTML=paras.map((p,pi)=>{
+    const list=(byP[pi]||[]).sort((a,b)=>a.start-b.start||b.end-a.end);let out="",pos=0;
+    list.forEach(a=>{if(a.start<pos)return;out+=esc(p.slice(pos,a.start))+'<mark class="'+a.cat+'" data-id="'+a.id+'" tabindex="0" title="'+esc(a.title)+'">'+esc(p.slice(a.start,a.end))+"</mark>";pos=a.end});
+    out+=esc(p.slice(pos));return '<p><span class="pnum">¶'+(pi+1)+"</span>"+out+"</p>";
+  }).join("");
+  $("annotWrap").hidden=false;
+  const by=t=>A.filter(a=>a.tab===t);
+  ["tone","voice","apa","structure","flow"].forEach(t=>{const n=by(t).length;$("n-"+t).textContent=n?String(n):""});
+  const W=res.totalWords,st=res.struct;const miss=st.filter(r=>r.status==="miss").length,weak=st.filter(r=>r.status==="weak").length;
+  const [tl,tc]=rate(by("tone").length,W,0.8,2.5),[vl,vc]=rate(by("voice").length,W,0.8,2.5),[al,ac]=rate(by("apa").length,W,0.4,1.5),[fl,fc]=rate(by("flow").length,W,0.6,2);
+  const sl=!st.length?["Not assessed",""]:miss===0&&weak<=1?["Strong","good"]:miss<=1?["Needs polish","warn"]:["Needs work","bad"];
+  const pts=n=>n+" point"+(n===1?"":"s");
+  $("ov").innerHTML='<div class="dims">'+dim("Academic tone",tl,tc,pts(by("tone").length))+dim("Voice and depth",vl,vc,pts(by("voice").length))+dim("APA 7 and sources",al,ac,pts(by("apa").length))+dim("Structure",sl[0],sl[1],st.length?(miss+" missing, "+weak+" to check"):"General section")+dim("Flow",fl,fc,pts(by("flow").length))+"</div>"+
+    '<div class="stat"><span><b>'+W+"</b> words</span><span><b>"+paras.length+"</b> paragraph"+(paras.length===1?"":"s")+"</span><span><b>"+res.nSents+"</b> sentences</span><span><b>"+(res.nSents?Math.round(W/res.nSents):0)+"</b> words per sentence</span><span>Lengths <b>"+res.minL+"–"+res.maxL+"</b> words</span><span><b>"+res.hedgeRate.toFixed(1)+"</b> hedges per 100 words</span><span><b>"+res.triads+"</b> lists of three</span><span><b>"+Math.round(res.awl*100)+"%</b> academic vocabulary</span></div>"+
+    "<h3>Where to start</h3>"+priorities(res)+
+    '<p class="meta" style="margin-top:14px">Academic vocabulary is the share of content words from Coxhead’s 570-family Academic Word List. There’s no single right figure; for a benchmark, paste a paragraph from a well-regarded article in your target journal and compare.</p>';
+  $("toneList").innerHTML=list(by("tone"),"No tone issues flagged. Read the section aloud once; anything you wouldn't say to an examiner, revise.");
+  $("voiceList").innerHTML='<p class="why" style="margin-top:0">These notes look at whether your own thinking comes through: specifics behind evaluative words, engagement with sources, how you qualify claims, and whether paragraphs follow one template.</p>'+list(by("voice"),"No voice issues flagged. Try the deep review for a closer read of how you engage with sources.");
+  $("apaList").innerHTML=list(by("apa"),"No APA 7 or sourcing issues flagged. Add your reference list to cross-check it too.");
+  $("flowList").innerHTML=list(by("flow"),"No flow issues flagged. Check that the last sentence of each paragraph leads into the next.");
+  const sname=$("section").selectedOptions[0].textContent;
+  $("structList").innerHTML=(st.length?"<h2>"+esc(sname)+": expected moves</h2><div class=\"moves\">"+st.map(r=>'<div class="move"><span class="dot '+(r.status==="ok"?"ok":r.status==="weak"?"weak":"miss")+'" role="img" aria-label="'+(r.status==="ok"?"present":r.status==="weak"?"check":"missing")+'"></span><div><div class="q">'+esc(r.name)+'</div><div class="why">'+esc(r.desc)+'</div><div class="where">'+esc(r.note)+"</div></div></div>").join("")+"</div>":'<p class="empty">Choose a specific section to check its expected moves.</p>')+
+    "<h3>Section and paragraph notes</h3>"+list(by("structure"),"Paragraph lengths look reasonable and each opens with a point rather than a source.")+
+    '<p class="meta" style="margin-top:12px">Signals are keyword-based, so a green dot means a move is likely present, not that it&rsquo;s done well. The deep review judges quality.</p>';
+  wireMarks();
+}
+function dim(k,v,c,n){return '<div class="dim"><div class="k">'+k+'</div><div class="v '+c+'">'+v+'</div><div class="n">'+n+"</div></div>"}
+function priorities(res){
+  const p=[];const A=res.A;const has=f=>A.some(f);
+  if(has(a=>a.cat==="cite"))p.push("Add sources for the claims marked in green. Unsupported claims are the first thing reviewers question.");
+  if(has(a=>a.title==="Sounds academic but says little"||a.title==="Little of your own position is visible"||a.title==="Sources reported, rarely evaluated"))p.push("Add substance where the Voice tab shows thin spots: evidence behind evaluative words, and your own reading of the sources.");
+  if(res.struct.some(r=>r.status==="miss"))p.push("Make the missing structural moves explicit (see Structure).");
+  if(has(a=>a.title.startsWith("Possible break")))p.push("Strengthen the links between sentences marked as possible breaks (see Flow).");
+  if(has(a=>a.cat==="over")||has(a=>a.title==="Few qualifications"))p.push("Match certainty to evidence: soften overclaims and qualify where evidence is partial.");
+  if(has(a=>a.cat==="apa"))p.push("Tidy APA 7 formatting (see APA 7).");
+  if(has(a=>a.cat==="tone"))p.push("Replace informal words and stock phrases with precise terms.");
+  return p.length?'<ul class="issues">'+p.slice(0,3).map((t,i)=>'<li><span class="chip c-pen">'+(i+1)+'</span><div class="why" style="color:var(--ink)">'+t+"</div></li>").join("")+"</ul>":'<p class="empty">Nothing urgent. Try the deep review for a closer read of argument and engagement.</p>';
+}
+function list(items,empty){
+  if(!items.length)return '<p class="empty">'+empty+"</p>";
+  return '<ul class="issues">'+items.map(a=>'<li id="n'+a.id+'"><span class="chip c-'+a.cat+'">'+(a.pi>=0?"¶"+(a.pi+1):"Section")+'</span><div><div class="q">'+esc(a.title)+'</div><div class="why">'+esc(a.why)+"</div>"+(a.start>=0?'<div class="row" style="gap:6px"><button class="btn small-btn" data-show="'+a.id+'">Show in draft</button>'+(window.__canSample?'<button class="btn small-btn" data-suggest="'+a.id+'">Suggest wording</button>':"")+"</div>":"")+'<div class="sugg" id="sg'+a.id+'"></div>'+"</div></li>").join("")+"</ul>";
+}
+function wireMarks(){
+  document.querySelectorAll("mark[data-id]").forEach(m=>{const go=()=>{const a=last.A.find(x=>x.id==m.dataset.id);if(!a)return;openTab(a.tab);const n=$("n"+a.id);if(n){n.scrollIntoView({block:"center",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});n.style.background="var(--pen-bg)";setTimeout(()=>n.style.background="",1400)}};m.onclick=go;m.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}}});
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-show]");if(!b)return;document.querySelectorAll("mark.active").forEach(x=>x.classList.remove("active"));const m=document.querySelector('mark[data-id="'+b.dataset.show+'"]');if(m){m.classList.add("active");m.scrollIntoView({block:"center"});m.focus()}});
+function openTab(name){document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.dataset.tab===name?"true":"false"));document.querySelectorAll(".tabpane").forEach(p=>p.hidden=p.id!=="pane-"+name)}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>openTab(t.dataset.tab));
+
+/* ---------- storage ---------- */
+function save(){try{localStorage.setItem("sd-draft",$("draft").value);localStorage.setItem("sd-refs",$("refs").value);localStorage.setItem("sd-sec",$("section").value);localStorage.setItem("sd-doc",$("doctype").value);$("saved").textContent="Kept in this browser"}catch(e){}}
+try{const d=localStorage.getItem("sd-draft");if(d)$("draft").value=d;const r=localStorage.getItem("sd-refs");if(r)$("refs").value=r;const s=localStorage.getItem("sd-sec");if(s)$("section").value=s;const dt=localStorage.getItem("sd-doc");if(dt)$("doctype").value=dt}catch(e){}
+let tmr;["draft","refs"].forEach(id=>$(id).addEventListener("input",()=>{$("err").textContent="";clearTimeout(tmr);tmr=setTimeout(save,600)}));
+["section","doctype"].forEach(id=>$(id).onchange=()=>{save();if(last)run()});
+function run(){
+  const t=$("draft").value.trim();
+  if(words(t).length<25){$("err").textContent="Add at least a few sentences (about 25 words) to check.";return false}
+  $("err").textContent="";render(analyse(t,$("refs").value,$("section").value,$("doctype").value));return true;
+}
+$("check").onclick=()=>{if(run())openTab("overview")};
+$("sample").onclick=()=>{$("draft").value=SAMPLE;$("refs").value="Singh, R. (2019). Brand recall in tier-2 Indian cities. Journal of Indian Business Research, 11(2), 145–160. doi:10.1108/JIBR-01-2019-0001\nKumar, A., Sharma, P. (2021). Influencer credibility and students. Indian Journal of Marketing, 51(4), 22–35.";$("section").value="intro";$("doctype").value="article";save();run();openTab("overview")};
+$("clear").onclick=()=>{$("draft").value="";$("refs").value="";$("annotWrap").hidden=true;$("ov").innerHTML='<p class="empty">Paste your draft, then choose Check draft.</p>';["toneList","voiceList","apaList","flowList","structList"].forEach(i=>$(i).innerHTML="");["tone","voice","apa","structure","flow"].forEach(t=>$("n-"+t).textContent="");last=null;save();$("draft").focus()};
+
+/* ---------- phrase bank ---------- */
+const PB={
+ "Taking a position":["This study argues that","A more plausible reading of this evidence is that","What these studies do not explain is","This interpretation, however, overlooks"],
+ "Evaluating sources":["…, although based on a single-city sample,","The evidence here is mixed:","These findings should be read in light of","… offers a useful starting point but does not address"],
+ "Comparing and synthesising":["Consistent with …, … also found that","In contrast to earlier findings,","Taken together, these studies suggest that","While … emphasise …, … focus instead on"],
+ "Being cautious (hedging)":["These findings suggest that","… may partly explain why","It appears that","… tends to be associated with","This is likely to hold where"],
+ "Identifying the gap":["However, little is known about","Relatively few studies have examined","… remains underexplored in the Indian context.","Existing studies have largely focused on …, leaving … unaddressed."],
+ "Stating purpose":["The present study examines","This paper addresses this gap by","Accordingly, the objectives of this study are to"],
+ "Discussing findings":["This result is consistent with","Contrary to expectations,","One possible explanation is that","This finding extends … by showing that"],
+ "Implications and limitations":["For managers, this suggests","A limitation of this study is","Because the data are cross-sectional,","Future research could test whether"],
+ "Signalling transition":["Turning now to","A related line of research concerns","Beyond …, scholars have also considered","This raises the question of"]
+};
+$("pb").innerHTML=Object.entries(PB).map(([g,items])=>'<div class="pb-group"><h3 style="margin-top:0">'+g+"</h3>"+items.map(i=>'<button class="pb-item" data-copy="'+esc(i)+'">'+esc(i)+"</button>").join("")+"</div>").join("");
+function toast(t){const el=$("toast");el.textContent=t;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1600)}
+$("pb").addEventListener("click",async e=>{const b=e.target.closest("[data-copy]");if(!b)return;try{await navigator.clipboard.writeText(b.dataset.copy);toast("Copied")}catch(err){const r=document.createRange();r.selectNodeContents(b);const s=getSelection();s.removeAllRanges();s.addRange(r);toast("Selected. Press Ctrl+C or ⌘C to copy")}});
+
+/* ---------- resources ---------- */
+const RES=[
+ ["Academic Phrasebank, University of Manchester","John Morley's phrase collection, organised by paper section and by function: hedging, comparing, signalling transition.","https://www.phrasebank.manchester.ac.uk/"],
+ ["APA Style, 7th edition (official)","Authoritative guidance on citations, references, statistics, numbers and bias-free language.","https://apastyle.apa.org/"],
+ ["Purdue OWL: APA formatting and style guide","Clear, example-led walkthroughs of APA 7 citations and reference entries.","https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/general_format.html"],
+ ["Academic Word List, Victoria University of Wellington","Averil Coxhead's 570 word families common across academic disciplines, used here for the academic vocabulary measure.","https://www.wgtn.ac.nz/lals/resources/academicwordlist"],
+ ["Swales and Feak, Academic Writing for Graduate Students (3rd ed., 2012)","The standard text on academic genres and moves. The section structure checks draw on it.","https://press.umich.edu/"],
+ ["Ken Hyland on stance, engagement and hedging","Hyland's research shows how writers signal their position and confidence. The voice and hedging checks draw on it.","https://scholar.google.com/scholar?q=Hyland+stance+and+engagement+academic+discourse"],
+ ["Graff and Birkenstein, They Say / I Say","Practical templates for entering an academic conversation and positioning your own argument.","https://wwnorton.com/"],
+ ["Helen Sword, Stylish Academic Writing (Harvard University Press, 2012)","How to write research prose that is precise and readable rather than stiff.","https://www.hup.harvard.edu/"],
+ ["UEfAP: Using English for Academic Purposes","Andy Gillett's free materials on academic style, cohesion and paragraph structure.","http://www.uefap.com/"],
+ ["UGC-CARE list","Check a journal here before submitting, particularly one that promises very fast publication.","https://ugccare.unipune.ac.in/"]
+];
+$("resList").innerHTML=RES.map(([t,d,u])=>'<a href="'+u+'" target="_blank" rel="noopener"><div class="t">'+esc(t)+'</div><div class="d">'+esc(d)+"</div></a>").join("");
+
+/* ---------- deep review (Claude) ---------- */
+let sample=null,ctl=null;
+(async()=>{try{if(window.claude&&window.claude.use)sample=await window.claude.use("sample")}catch(e){}
+  window.__canSample=!!sample;if(sample&&last)render(last);
+  if(!sample){$("polishBtn").hidden=true;$("polishErr").style.color="var(--ink-3)";$("polishErr").textContent="Wording help is available when this page is opened in Claude."}
+  if(!sample){$("deepBtn").hidden=true;$("deepErr").style.color="var(--ink-3)";$("deepErr").textContent="The deep review is available when this page is opened in Claude."}})();
+const ROLE={article:"a peer reviewer for a Scopus-indexed Business and Management journal",review:"a peer reviewer for a review article in Business and Management, attentive to coverage, synthesis and whether a clear framework or research agenda emerges",chapter:"the editor of an edited academic volume in Business and Management",conference:"a reviewer for an academic conference in Business and Management",thesis:"a PhD thesis examiner in Business and Management",synopsis:"a PhD supervisor reviewing a doctoral synopsis at an Indian university"};
+const SEC={abstract:"Abstract: purpose, design, findings, originality/value, implications; concise and self-contained.",intro:"Introduction: Swales' CARS moves (territory, niche/gap, occupying the niche with purpose and contribution).",lit:"Literature review or theoretical background: theoretical anchor, thematic organisation, synthesis rather than summary, critical evaluation, and a path toward the gap.",hyp:"Hypotheses development: theory-grounded reasoning, supporting evidence, explicit logic, and labelled directional hypotheses.",gap:"Research gap and objectives: a precise gap; measurable objectives mapped to it; testable hypotheses.",method:"Methodology: design, population, sample and sampling (justified), instruments and scale sources, reliability and validity, analysis matched to objectives, ethics; tense appropriate to a completed or proposed study.",results:"Results: measurement quality, tests reported with statistics in APA format, links to hypotheses, restraint from interpretation.",discussion:"Discussion: key findings, comparison with prior research, explanations, engagement with unexpected results, and a bridge to implications.",implications:"Implications: theoretical, managerial and (where relevant) policy implications, each traced to specific findings and specific enough to act on.",limits:"Limitations and future research: named limitations, their consequences for interpretation, and future research that follows from them.",conclusion:"Conclusion: answers the research question, states the contribution, closes with significance; no new sources.",general:"General academic prose: argument clarity, paragraph unity, cohesion, register."};
+$("deepBtn").onclick=async()=>{
+  const t=$("draft").value.trim();
+  if(words(t).length<25){$("deepErr").style.color="var(--pen)";$("deepErr").textContent="Add at least a few sentences (about 25 words) first.";return}
+  const paras=splitParas(t);const doc=$("doctype").value,sec=$("section").value;
+  const prompt=`You are ${ROLE[doc]}. You are reviewing one section of the author's manuscript. Style guide: APA 7th edition.
+Section and what it should achieve: ${SEC[sec]}
+
+Strict rules:
+- Give diagnosis and guidance only. Never rewrite the author's sentences and never supply replacement sentences, paragraphs, evidence, citations or arguments.
+- You may name a kind of move or signal (for example "a contrast signal") with at most a 4-word generic example.
+- To locate an issue, quote at most 6 words from the draft.
+- Pay special attention to authorial voice and depth: where claims are generic or unsupported, where sources are reported but not evaluated, where the author's own position, critique or qualification is missing, and where paragraphs follow the same template. For each, ask a question only the author can answer from their own knowledge of the research.
+- Also judge paragraph unity (clear topic sentence), cohesion between sentences, and connection between paragraphs.
+- Be specific, constructive and brief. UK English.
+
+Return ONLY a JSON object, no preamble and no code fences, in this shape:
+{"overall":"2-3 sentences",
+"voice":{"rating":"distinct|emerging|absent","note":"one or two sentences"},
+"engagement":{"rating":"critical|descriptive|superficial","note":"one or two sentences"},
+"moves":[{"move":"expected move","status":"present|weak|missing","note":"one sentence"}],
+"thin_spots":[{"quote":"up to 6 words from the draft","issue":"why this says less than it seems","question":"what the author should answer"}],
+"paragraphs":[{"index":1,"role":"what the paragraph is doing, under 12 words","topic_sentence":"clear|unclear|missing","flow":"strong|uneven|broken","feedback":"1-2 sentences","question":"one guiding question"}],
+"apa":["short APA 7 observations, at most 4"],
+"priorities":["the three most important revisions, most important first"]}
+Include at most 5 thin_spots.
+
+The section, with numbered paragraphs:
+${paras.map((p,i)=>"["+(i+1)+"] "+p).join("\n\n")}`;
+  $("deepErr").textContent="";$("deepOut").innerHTML='<p class="empty">Thinking… a careful read takes up to a minute.</p>';
+  $("deepBtn").disabled=true;$("stopBtn").hidden=false;ctl=new AbortController();$("stopBtn").onclick=()=>ctl&&ctl.abort();
+  try{renderDeep(await sample.json(prompt,{signal:ctl.signal,modelTier:"default"}))}
+  catch(e){$("deepOut").innerHTML="";$("deepErr").style.color="var(--pen)";const c=e&&e.code;
+    $("deepErr").textContent=c==="cancelled"?"Review stopped.":c==="not_granted"?"The deep review needs your permission to run. Choose Get a deep review again and allow it.":c==="rate_limited"?"Too many requests just now. Wait a minute before trying again.":"The review couldn't be completed. Try again, or check a shorter section.";}
+  finally{$("deepBtn").disabled=false;$("stopBtn").hidden=true}
+};
+const lvl=s=>["present","clear","strong","distinct","critical"].includes(s)?"ok":["missing","broken","absent","superficial"].includes(s)?"miss":"weak";
+function renderDeep(r){
+  if(!r||typeof r!=="object"){$("deepOut").innerHTML='<p class="empty">The review came back in an unexpected form. Try again.</p>';return}
+  const S=x=>esc(String(x==null?"":x));let h="";
+  if(r.overall)h+='<h3 style="margin-top:14px">Overall</h3><p class="q" style="font-weight:400;margin:0">'+S(r.overall)+"</p>";
+  if(Array.isArray(r.priorities)&&r.priorities.length)h+='<h3>Revise first</h3><ul class="issues">'+r.priorities.slice(0,3).map((p,i)=>'<li><span class="chip c-pen">'+(i+1)+'</span><div class="why" style="color:var(--ink)">'+S(p)+"</div></li>").join("")+"</ul>";
+  const vr=[["Authorial voice",r.voice],["Engagement with sources",r.engagement]].filter(x=>x[1]&&typeof x[1]==="object");
+  if(vr.length)h+='<h3>Voice and engagement</h3><div class="moves">'+vr.map(([k,v])=>'<div class="move"><span class="dot '+lvl(v.rating)+'" role="img" aria-label="'+S(v.rating)+'"></span><div><div class="q">'+k+": "+S(v.rating)+'</div><div class="why">'+S(v.note)+"</div></div></div>").join("")+"</div>";
+  if(Array.isArray(r.thin_spots)&&r.thin_spots.length)h+='<h3>Thin spots, and questions only you can answer</h3>'+r.thin_spots.slice(0,5).map(t=>'<div class="para-card"><div class="q">“'+S(t.quote)+'…”</div><div class="why">'+S(t.issue)+'</div><div class="qtn">'+S(t.question)+"</div></div>").join("");
+  if(Array.isArray(r.moves)&&r.moves.length)h+='<h3>Structural moves</h3><div class="moves">'+r.moves.map(m=>'<div class="move"><span class="dot '+lvl(m.status)+'" role="img" aria-label="'+S(m.status)+'"></span><div><div class="q">'+S(m.move)+'</div><div class="why">'+S(m.note)+"</div></div></div>").join("")+"</div>";
+  if(Array.isArray(r.paragraphs)&&r.paragraphs.length)h+="<h3>Paragraph by paragraph</h3>"+r.paragraphs.map(p=>'<div class="para-card"><div class="hd"><span class="chip c-pen">¶'+S(p.index)+'</span><span class="chip c-flow">Topic sentence: '+S(p.topic_sentence||"–")+'</span><span class="chip c-apa">Flow: '+S(p.flow||"–")+'</span></div><div class="q">'+S(p.role)+'</div><div class="why">'+S(p.feedback)+"</div>"+(p.question?'<div class="qtn">'+S(p.question)+"</div>":"")+"</div>").join("");
+  if(Array.isArray(r.apa)&&r.apa.length)h+='<h3>APA 7</h3><ul class="issues">'+r.apa.map(a=>'<li><span class="chip c-apa">APA</span><div class="why">'+S(a)+"</div></li>").join("")+"</ul>";
+  $("deepOut").innerHTML=h||'<p class="empty">No feedback returned. Try again.</p>';
+}
+/* ---------- wording help (sentence-level) ---------- */
+function sentenceAt(a){
+  const p=last.paras[a.pi];const ss=last.sentInfo[a.pi];let off=0;
+  for(const s of ss){const st=p.indexOf(s,off);off=st+s.length;if(a.start>=st&&a.start<st+s.length)return s}
+  return p.slice(a.start,a.end);
+}
+function polishPrompt(text,issue){
+  const sec=$("section").selectedOptions[0].textContent,doc=$("doctype").selectedOptions[0].textContent;
+  return `You are an academic language editor for Business and Management writing (APA 7, UK English). The author wrote the text below for the ${sec} of a ${doc}.
+${issue?"A reviewer flagged this issue: "+issue+"\n":""}
+Edit ONLY this text:
+"""${text}"""
+
+Rules:
+- Preserve the author's meaning, claims and key terms. Change register, precision, grammar and sentence structure only.
+- Keep the author's level of certainty, unless the flagged issue is overclaiming or missing qualification, in which case adjust certainty to be defensible.
+- Do not add facts, figures, examples, sources, findings or arguments. Where the fix needs something only the author can supply, insert a bracketed placeholder such as [Author, Year], [specific figure] or [example], never invented content.
+- Avoid stock phrases and generic intensifiers (for example "plays a vital role", "robust", "crucial").
+- Give exactly 2 options with different sentence structures.
+
+Return ONLY JSON, no code fences: {"options":[{"text":"the edited text","change":"one short line on what changed and why"}],"note":"one sentence on any placeholder the author must fill, or empty"}`;
+}
+function renderPolish(el,r){
+  if(!r||!Array.isArray(r.options)){el.innerHTML='<p class="empty">No suggestion came back. Try again.</p>';return}
+  el.innerHTML=r.options.slice(0,2).map((o,i)=>'<div class="para-card" style="margin-top:10px"><div class="hd"><span class="chip c-cite">Option '+(i+1)+'</span></div><div class="q" style="font-weight:400">'+esc(o.text||"")+'</div><div class="why" style="margin-top:4px">'+esc(o.change||"")+'</div><button class="btn small-btn" data-copy="'+esc(o.text||"")+'">Copy</button></div>').join("")+(r.note?'<p class="qtn">'+esc(r.note)+"</p>":"");
+}
+async function runPolish(text,issue,el,btn){
+  if(!sample)return;
+  el.innerHTML='<p class="empty">Thinking…</p>';if(btn)btn.disabled=true;
+  try{renderPolish(el,await sample.json(polishPrompt(text,issue),{modelTier:"default"}))}
+  catch(e){const c=e&&e.code;el.innerHTML='<p class="err">'+(c==="not_granted"?"Wording help needs your permission. Try again and allow it.":c==="rate_limited"?"Too many requests just now. Wait a minute and try again.":"Couldn't get a suggestion. Try again.")+"</p>"}
+  finally{if(btn)btn.disabled=false}
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-suggest]");if(b&&last){const a=last.A.find(x=>x.id==b.dataset.suggest);if(a)runPolish(sentenceAt(a),a.title+". "+a.why,$("sg"+a.id),b);return}
+  const c=e.target.closest(".sugg [data-copy], #polishOut [data-copy]");if(c){e.stopPropagation();(async()=>{try{await navigator.clipboard.writeText(c.dataset.copy);toast("Copied")}catch(err){toast("Select the text to copy it")}})()}
+});
+$("polishIn").addEventListener("input",()=>{const n=words($("polishIn").value).length;$("polishCount").textContent=n?n+" / 80 words":"";$("polishErr").textContent=""});
+$("polishBtn").onclick=()=>{
+  const t=$("polishIn").value.trim();const n=words(t).length;$("polishErr").style.color="var(--pen)";
+  if(!n){$("polishErr").textContent="Paste a sentence first.";return}
+  if(n>80){$("polishErr").textContent="Keep it to 80 words or fewer. Work a sentence or two at a time, so each change stays yours to judge.";return}
+  runPolish(t,"",$("polishOut"),$("polishBtn"));
+};
+})();
+</script>
+</body>
+</html>
